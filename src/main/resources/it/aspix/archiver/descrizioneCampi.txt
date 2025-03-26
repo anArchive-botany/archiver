@@ -1,0 +1,29 @@
+directoryInfo.copyLink="Link da": copia i dati di questo oggetto per creare un link.
+directoryInfo.pasteLink="Link a": crea un collegamento dall'oggetto da cui si è fatto "copia" verso questo oggetto.
+directoryInfo.containerSeqNo=Numero progressivo per il contenitore (erbario o progetto), lo inserisce il sistema automaticamente ma può anche essere inserito manualmente. Deve essere unico per la collezione/progetto.
+directoryInfo.containerExternalId=Un identificativo alfanumerico per il campione (a livello di erbario o di progetto), non viene controllata l'unicità.
+directoryInfo.subContainerSeqNo=Numero progressivo per la collezione/sottoprogetto, lo inserisce il sistema automaticamente ma può anche essere inserito manualmente. Deve essere unico per la collezione/sottoprogetto.
+directoryInfo.subContainerExternalId=Un identificativo alfanumerico per il campione (a livello di collezione o di sottoprogetto), non viene controllata l'unicità.
+place.latitude=Il formato dipende dalle preferenze. Vanno ad esempio bene <b>17° 30' 15.5" N</b> oppure <b>14 18.567 S</b>
+place.longitude=Il formato dipende dalle preferenze. Vanno ad esempio bene <b>17° 12' 23" E</b> oppure <b>18.77732 O</b>
+place.mainGrid=Un numero a sei cifre ricvavato dalla cartografia regionale, ad esempio <b>320140</b>.
+place.name=CTRL+E per completare i dati geografici, verranno recuperati i dati già presenti nel server
+place.town=CTRL+E per completare i dati geografici, verranno recuperati i dati già presenti nel server
+publicationRef.citation=Una forma abbreviata: "Autore1, Autore2, Autore3. anno. Nome rivista. Vol.:(pagg)" (es. "<b>Rossi M., Verdi S., Bianchi Z. 2002. Fitosociologia 39(1): 45-70"</b>) 
+publicationRef.citation=Seguendo questo esempio: "<b>Giorn. Bot. Ital. 127(3): 710 [1993] BRACCO F., BUFFA G., GHIRELLI L. -- The vegetation of the ski areas of Mt. Bondone (Trento-Italy) - Preliminary results.</b>" 
+sample.surveyer=Inserire una sequenza di "Cognome Iniziale nome" separati da Virgola.<br/> Ad esempio: "<b>Rossi M., Bianchi G.</b>"
+sample.oraArrivo=Usare il formato oo:mm oppure oo:mm:ss
+sample.oraInizio=Usare il formato oo:mm oppure oo:mm:ss
+sample.oraFine=Usare il formato oo:mm oppure oo:mm:ss
+sample.classificazione=CTRL+E per aprire un editor che facilita l'immissione della sintassonomia.
+specimen.inAssociationWith=Specie trovate in associazione con quella di questo cartellino.
+specimen.collocation=Collocazione fisica del campione all'interno dell'erbario.
+specimen.characteristics=Caratteristiche della pianta che sono andate perse nell'essiccazione (es: colore dei fiori).
+specimen.countrysideReference=Id assegnato al campione in campagna.
+place.TMP.x=Questo dato non verrà memorizzato! Serve soltanto insieme alla coordinata Y per essere poi converita in coordinata geografica WGS84.
+place.TMP.y=Questo dato non verrà memorizzato! Serve soltanto insieme alla coordinata X per essere poi converita in coordinata geografica WGS84.
+
+# i dati qua sotto sono riguardano componenti specifici, sono nomi di classi
+CampoData=La data può essere espressa come gg-mm-aaaa oppure mm-aaaa o anche soltanto l'anno.
+CampoEsposizione=esempi: NNE oppure 45°
+CampoInclinazione=formato 67% oppure 98°

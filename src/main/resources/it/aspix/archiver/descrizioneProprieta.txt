@@ -1,0 +1,396 @@
+# ---------------- le preferenze generali di tutto il sistema ---------------
+
+generale.cacheInfoSpecie@DESCRIZIONE=Utilizza una cache per le informazioni sulle specie
+generale.cacheInfoSpecie@TIPO=boolean
+generale.cacheInfoSpecie@DEFAULT=true
+generale.cacheInfoSpecie@true=si
+generale.cacheInfoSpecie@false=no
+generale.cacheInfoSpecie@NASCONDI=true
+
+generale.carattereSpecieVeloci@DESCRIZIONE=Il carattere per immettere velocemente i nomi di specie (vedi generale.specieVeloci)
+generale.carattereSpecieVeloci@TIPO=stringa
+generale.carattereSpecieVeloci@DEFAULT=+
+
+generale.centraFinestreAllAvvio@DESCRIZIONE=Centra le finestre di dialogo quando vengono aperte
+generale.centraFinestreAllAvvio@TIPO=boolean
+generale.centraFinestreAllAvvio@DEFAULT=true
+generale.centraFinestreAllAvvio@true=si
+generale.centraFinestreAllAvvio@false=no
+
+generale.esposizione@DESCRIZIONE=Il modo di presentare l'esposizione
+generale.esposizione@TIPO=enumerato
+generale.esposizione@DEFAULT=numerico
+generale.esposizione@numerico=come numero (i gradi), es: 45 o 45°
+generale.esposizione@cardinale=come sigla, es: NE
+
+generale.formatoData@DESCRIZIONE=Il formato della data da utilizzare
+generale.formatoData@TIPO=enumerato
+generale.formatoData@DEFAULT=europa
+generale.formatoData@europa=Formato classico europeo: il 18 febbraio 2010 è "18/02/2010"
+generale.formatoData@iso=Formato iso: il 18 febbraio 2010 è "2010/02/18"
+
+generale.gradi@DESCRIZIONE=Il modo di presentare i gradi
+generale.gradi@TIPO=enumerato
+generale.gradi@DEFAULT=gps
+generale.gradi@gps=gradi primi e secondi, es: 10°22'34.29"
+generale.gradi@decimali=numero decimale, 12.0947458
+generale.gradi@gradiPrimi=gradi e primi come decimali, es:12° 13.88363'
+
+generale.inclinazione@DESCRIZIONE=Il modo di presentare l'inclinazione
+generale.inclinazione@TIPO=enumerato
+generale.inclinazione@DEFAULT=numerico
+generale.inclinazione@numerico=come numero, es: 27
+generale.inclinazione@percentuale=come percentuale, es: 45%
+
+generale.informazioniSpecieAutomatico@DESCRIZIONE=Vanno recuperate automaticamente le informazioni sulle specie
+generale.informazioniSpecieAutomatico@TIPO=boolean
+generale.informazioniSpecieAutomatico@DEFAULT=true
+generale.informazioniSpecieAutomatico@true=si
+generale.informazioniSpecieAutomatico@false=no
+
+generale.mostraIndicazioni@DESCRIZIONE=Mostra indicazioni sulla compilazione dei campi
+generale.mostraIndicazioni@TIPO=boolean
+generale.mostraIndicazioni@DEFAULT=true
+generale.mostraIndicazioni@true=si
+generale.mostraIndicazioni@false=no
+
+generale.specieVeloci@DESCRIZIONE=Consente di immettere i nomi di specie passando dal nome del genere a quello della specie premendo un tasto (specificato in generale.carattereSpecieVeloci)
+generale.specieVeloci@TIPO=boolean
+generale.specieVeloci@DEFAULT=true
+generale.specieVeloci@true=si
+generale.specieVeloci@false=no
+
+generale.suggerimentiGeograficiEstesi@DESCRIZIONE=Recupera ulteriori informazioni oltre a quelle politiche nei suggerimenti geografici
+generale.suggerimentiGeograficiEstesi@TIPO=boolean
+generale.suggerimentiGeograficiEstesi@DEFAULT=true
+generale.suggerimentiGeograficiEstesi@true=si
+generale.suggerimentiGeograficiEstesi@false=no
+
+generale.ultimaVersioneUsata@DESCRIZIONE=Il numero di versione di questo programma, non modificabile.
+generale.ultimaVersioneUsata@TIPO=stringa
+generale.ultimaVersioneUsata@DEFAULT=0
+generale.ultimaVersioneUsata@NASCONDI=true
+
+generale.aspettoInterfaccia@DESCRIZIONE=L'alspetto che deve assumere l'interfaccia (aggiornata al prossimo avvio di archiver)
+generale.aspettoInterfaccia@TIPO=enumerato
+generale.aspettoInterfaccia@DEFAULT=nativo
+generale.aspettoInterfaccia@nativo=l'aspetto classico di tutte le applicazioni
+generale.aspettoInterfaccia@nimbus=Nimbus: un aspetto più pulito utilizzabile su tutte le piattaforme
+generale.aspettoInterfaccia@metal=Metal: una alternativa che consente di avere interfacce più compatte in Mac OS X
+
+generale.warningProgressivi@DESCRIZIONE=Quando bisogna mostrare un messaggio di avviso alla creazione di un nuovo oggetto?
+generale.warningProgressivi@TIPO=enumerato
+generale.warningProgressivi@DEFAULT=mai
+generale.warningProgressivi@mai=mai
+generale.warningProgressivi@collezione=quando manca il progressivo della collezione/progetto
+generale.warningProgressivi@sempre=quando manca qualsiasi progressivo
+
+generale.pathSchema@DESCRIZIONE=Ubicazione dello schema dei dati, non modificare a meno che non si è sicuri di quello che si sta facendo
+generale.pathSchema@TIPO=stringa
+generale.pathSchema@DEFAULT=http://www.anarchive.it/simpleBotanicalData.xsd
+
+generale.mostraPreferenzeFondamentali@DESCRIZIONE=All'avvio di archiver mostra le preferenze fondamentali
+generale.mostraPreferenzeFondamentali@TIPO=boolean
+generale.mostraPreferenzeFondamentali@DEFAULT=true
+generale.mostraPreferenzeFondamentali@true=si
+generale.mostraPreferenzeFondamentali@false=no
+
+
+# --------------- maschere per la creazione di nuovi oggetti ----------------
+
+umask.ownerRead@DESCRIZIONE=Cosa può fare in lettura colui che ha creato il dato (accesso completo va bene)
+umask.ownerRead@TIPO=enumerato
+umask.ownerRead@DEFAULT=full
+umask.ownerRead@full=accesso completo, può vedere tutti i campi
+umask.ownerRead@limited=accesso limitato, viene nascosta la località e le coordinate
+umask.ownerRead@none=dato non visibile, compare soltanto nelle statistiche
+
+umask.ownerWrite@DESCRIZIONE=Cosa può fare in scrittura colui che ha creato il dato (accesso completo va bene)
+umask.ownerWrite@TIPO=enumerato
+umask.ownerWrite@DEFAULT=full
+umask.ownerWrite@full=accesso completo, può modificare il dato
+umask.ownerWrite@limited=-non usare-
+umask.ownerWrite@none=non può modificare il dato dopo averlo inserito
+
+umask.groupRead@DESCRIZIONE=Cosa può fare in lettura una persona iscritta allo stesso erbario/progetto
+umask.groupRead@TIPO=enumerato
+umask.groupRead@DEFAULT=full
+umask.groupRead@full=accesso completo, può vedere tutti i campi
+umask.groupRead@limited=accesso limitato, viene nascosta la località e le coordinate
+umask.groupRead@none=dato non visibile, compare soltanto nelle statistiche
+
+umask.groupWrite@DESCRIZIONE=Cosa può fare in scrittura una persona iscritta allo stesso erbario/progetto
+umask.groupWrite@TIPO=enumerato
+umask.groupWrite@DEFAULT=full
+umask.groupWrite@full=accesso completo, può modificare il dato
+umask.groupWrite@limited=-non usare-
+umask.groupWrite@none=non può modificare il dato
+
+umask.otherRead@DESCRIZIONE=Cosa possono fare gli utenti non iscritti al contenitore, viene applicata a tutti i nuovi oggetti creati
+umask.otherRead@TIPO=enumerato
+umask.otherRead@DEFAULT=limited
+umask.otherRead@full=accesso completo, possono vedere tutti i campi
+umask.otherRead@limited=accesso limitato, viene nascosta la località e le coordinate
+umask.otherRead@none=dato non visibile, compare soltanto nelle statistiche
+
+umask.otherWrite@DESCRIZIONE=Cosa può fare in scrittura una persona qualsiasi
+umask.otherWrite@TIPO=enumerato
+umask.otherWrite@DEFAULT=none
+umask.otherWrite@full=accesso completo, può modificare il dato (non è una buona idea)
+umask.otherWrite@limited=-non usare-
+umask.otherWrite@none=non può modificare il dato
+
+
+
+# ---------------------- le preferenze di connessione -----------------------
+
+connessione.nome@DESCRIZIONE=Il nome di utente da utilizzare per connettersi al sever
+connessione.nome@TIPO=stringa
+connessione.nome@DEFAULT=
+
+connessione.password@DESCRIZIONE=La password da utilizzare in connessione
+connessione.password@TIPO=stringa
+connessione.password@DEFAULT=
+connessione.password@NASCONDI=true
+
+connessione.URL@DESCRIZIONE=Indirizzo di connessione con il server
+connessione.URL@TIPO=stringa
+connessione.URL@DEFAULT=http://www.anarchive.info/anArchive
+
+connessione.lingua@DESCRIZIONE=La lingua da dichiarare al server
+connessione.lingua@TIPO=stringa
+connessione.lingua@DEFAULT=it
+connessione.password@NASCONDI=true
+
+
+
+# ------------------ preferenze per le check-list ---------------------------
+
+check-list.categorieGeneriche@DESCRIZIONE=Quali categorie generiche vuoi prendere in considerazione, una lista separate da virgola (Batteri, Alghe azzurre, Alghe, Funghi, Licheni, Muschi-epatiche, Felci, Gymnosperme, Angiosperme)
+check-list.categorieGeneriche@TIPO=stringa
+check-list.categorieGeneriche@DEFAULT=
+
+check-list.database@DESCRIZIONE=Il database predefinito per le check-list
+check-list.database@TIPO=stringa
+check-list.database@PATTERN=[a-zA-Z0-9\-]*
+check-list.database@DEFAULT=
+
+check-list.cercaSoloPropriaCL@DESCRIZIONE=Effettua le ricerche soltanto nella checl-list predefinitta
+check-list.cercaSoloPropriaCL@TIPO=boolean
+check-list.cercaSoloPropriaCL@DEFAULT=true
+check-list.cercaSoloPropriaCL@true=si
+check-list.cercaSoloPropriaCL@false=no
+
+check-list.interfaccia@DESCRIZIONE=Quale interfaccia vuoi utilizzare per visualizzare un taxa?  [avrà effetto al prossimo avvio]
+check-list.interfaccia@TIPO=enumerato
+check-list.interfaccia@DEFAULT=singolo
+check-list.interfaccia@singolo=un solo pannello da scorrere
+check-list.interfaccia@linguette=due pannelli sfogliabili usando delle linguette
+
+check-list.refreshRicercaAutomatico@DESCRIZIONE=Dopo aver modificato una specie effettua di nuovo la ricerca
+check-list.refreshRicercaAutomatico@TIPO=boolean
+check-list.refreshRicercaAutomatico@DEFAULT=true
+check-list.refreshRicercaAutomatico@true=si
+check-list.refreshRicercaAutomatico@false=no
+
+check-list.simulazioneModificaSpecie@DESCRIZIONE=Richiedi al server di simulare la modifica di una specie prima di effettuarla realmente
+check-list.simulazioneModificaSpecie@TIPO=boolean
+check-list.simulazioneModificaSpecie@DEFAULT=true
+check-list.simulazioneModificaSpecie@true=si
+check-list.simulazioneModificaSpecie@false=no
+
+check-list.nonPulireFamiglia@DESCRIZIONE=Alla pressione del pulsante "nuovo" non pulire la famiglia
+check-list.nonPulireFamiglia@TIPO=boolean
+check-list.nonPulireFamiglia@DEFAULT=false
+check-list.nonPulireFamiglia@true=si
+check-list.nonPulireFamiglia@false=no
+
+check-list.nonPulireBibliografia@DESCRIZIONE=Alla pressione del pulsante "nuovo" non pulire i campi del gruppo "riferimento bibliografico"
+check-list.nonPulireBibliografia@TIPO=boolean
+check-list.nonPulireBibliografia@DEFAULT=false
+check-list.nonPulireBibliografia@true=si
+check-list.nonPulireBibliografia@false=no
+
+check-list.nonPulireNulla@DESCRIZIONE=Alla pressione del pulsante "nuovo" non pulire nulla
+check-list.nonPulireNulla@TIPO=boolean
+check-list.nonPulireNulla@DEFAULT=false
+check-list.nonPulireNulla@true=si
+check-list.nonPulireNulla@false=no
+
+# ----------------- le preferenze degli erbari ------------------------------
+
+herbaria.bloccaNomeSpecie@DESCRIZIONE=Blocca il nome della specie nei nuovi cartellini
+herbaria.bloccaNomeSpecie@TIPO=boolean
+herbaria.bloccaNomeSpecie@DEFAULT=true
+herbaria.bloccaNomeSpecie@true=si
+herbaria.bloccaNomeSpecie@false=no
+
+herbaria.database@DESCRIZIONE=Il nome del database predefinito usato per memorizzare i cartellini
+herbaria.database@TIPO=stringa
+herbaria.database@PATTERN=[a-zA-Z0-9]*
+herbaria.database@DEFAULT=
+
+herbaria.interfaccia@DESCRIZIONE=Quale interfaccia vuoi utilizzare per visualizzare i cartellini?  [avrà effetto al prossimo avvio]
+herbaria.interfaccia@TIPO=enumerato
+herbaria.interfaccia@DEFAULT=singolo
+herbaria.interfaccia@singolo=un solo pannello da scorrere
+herbaria.interfaccia@linguette=due pannelli sfogliabili usando delle linguette
+
+herbaria.mostraRicercaSintetica@DESCRIZIONE=Nei risultati della ricerca mostra dei dati sintetici
+herbaria.mostraRicercaSintetica@TIPO=boolean
+herbaria.mostraRicercaSintetica@DEFAULT=true
+herbaria.mostraRicercaSintetica@true=si (più veloce)
+herbaria.mostraRicercaSintetica@false=no
+
+herbaria.pulireAlNuovo@DESCRIZIONE=Quando viene premuto il pulsante "nuovo" vanno cancellati
+herbaria.pulireAlNuovo@TIPO=enumerato
+herbaria.pulireAlNuovo@DEFAULT=tutto
+herbaria.pulireAlNuovo@tutto=tutti i campi
+herbaria.pulireAlNuovo@tranneGeografici=tutti i campi tranne i geografici
+herbaria.pulireAlNuovo@soloProgressivi=soltanto i progressivi
+
+herbaria.statoConservazione@DESCRIZIONE=Stato di conservazione predefinito per un cartellino
+herbaria.statoConservazione@TIPO=enumerato
+herbaria.statoConservazione@DEFAULT=buono
+herbaria.statoConservazione@ottimo=Il cartellino è in ottimo stato di conservazione
+herbaria.statoConservazione@buono=Il cartellino è in buono stato di conservazione 
+herbaria.statoConservazione@sufficiente=Il cartellino è in uno stato di conservazione sufficiente
+herbaria.statoConservazione@pessimo=Il cartellino è in pessimo stato di conservazione
+
+herbaria.tabellaRicercaEditabile@DESCRIZIONE=Permetti di editare la tabella dei dati trovati
+herbaria.tabellaRicercaEditabile@TIPO=boolean
+herbaria.tabellaRicercaEditabile@DEFAULT=false
+herbaria.tabellaRicercaEditabile@true=si
+herbaria.tabellaRicercaEditabile@false=no (più veloce)
+herbaria.tabellaRicercaEditabile@NASCONDI=false
+
+
+
+# ---------------------- le preferenze della vegetazione --------------------
+
+vegetazione.bloccaNomeSpecie@DESCRIZIONE=Blocca i nomi delle specie rilevate
+vegetazione.bloccaNomeSpecie@TIPO=boolean
+vegetazione.bloccaNomeSpecie@DEFAULT=false
+vegetazione.bloccaNomeSpecie@true=si
+vegetazione.bloccaNomeSpecie@false=no
+
+vegetazione.database@DESCRIZIONE=Il nome del database predefinito usato per memorizzare i rilievi o plot
+vegetazione.database@TIPO=stringa
+vegetazione.database@PATTERN=[a-zA-Z0-9]*
+vegetazione.database@DEFAULT=
+
+vegetazione.defaultScalaAbbondanza@DESCRIZIONE=La scala di abbondanza per i nuovi rilievi/plot
+vegetazione.defaultScalaAbbondanza@TIPO=enumerato
+vegetazione.defaultScalaAbbondanza@DEFAULT=braun-blanquet
+vegetazione.defaultScalaAbbondanza@braun-blanquet=braun-blanquet
+vegetazione.defaultScalaAbbondanza@percentage=percentuale
+vegetazione.defaultScalaAbbondanza@pignatti=pignatti
+
+vegetazione.interfaccia@DESCRIZIONE=Quale interfaccia vuoi utilizzare per visualizzare i rilievi/plot? [avrà effetto al prossimo avvio]
+vegetazione.interfaccia@TIPO=enumerato
+vegetazione.interfaccia@DEFAULT=singolo
+vegetazione.interfaccia@singolo=un solo pannello da scorrere
+vegetazione.interfaccia@linguette=pannelli sfogliabili usando delle linguette
+
+vegetazione.modelloPredefinito@DESCRIZIONE=Alla pressione del pulsante "nuovo" cosa va creato? [richede il riavvio]
+vegetazione.modelloPredefinito@TIPO=enumerato
+vegetazione.modelloPredefinito@DEFAULT=rilievo
+vegetazione.modelloPredefinito@plot=un plot
+vegetazione.modelloPredefinito@rilievo=un rilievo della vegetazione
+
+vegetazione.modelloLivelli@DESCRIZIONE=Quale modello di stratificazione utilizzi normalmente? Questa proprietà viene utilizzata per stabilire il modello e in caso di assenza della proprietà schemaStrati anche per creare l'insieme iniziale di strati.
+vegetazione.modelloLivelli@TIPO=enumerato
+vegetazione.modelloLivelli@DEFAULT=1
+vegetazione.modelloLivelli@0=nessuna stratificazione
+vegetazione.modelloLivelli@1=soltanto strati principali
+vegetazione.modelloLivelli@10=soltanto strati principali + strato unico
+vegetazione.modelloLivelli@333=livelli principali con tre sublivelli (alto, medio, basso)
+vegetazione.modelloLivelli@222=livelli principali con due sublivelli (alto, basso)
+vegetazione.modelloLivelli@322=livello degli alberi con tre sublivelli (alto, medio, basso), arbusti ed erbe con due sublivelli (alto, basso)
+vegetazione.modelloLivelli@999=completamente personalizzato
+
+vegetazione.modelloSuddivisioni@DESCRIZIONE=Nomi delle suddivisioni per i plot con relativo numero di suddivisioni (esempio "plot 2" se ogni plot è diviso in due sia in orizzontale che in verticale)
+vegetazione.modelloSuddivisioni@TIPO=stringa
+vegetazione.modelloSuddivisioni@DEFAULT=plot 2; quadrante 2; settore 1
+
+vegetazione.nonPulireNulla@DESCRIZIONE=Alla pressione del pulsante "nuovo" non pulire nulla (nb: se è ad esempio presente un plot con relativa divisione in celle queste non verranno cancellate e verrà creato un nuovo plot)
+vegetazione.nonPulireNulla@TIPO=boolean
+vegetazione.nonPulireNulla@DEFAULT=false
+vegetazione.nonPulireNulla@true=si
+vegetazione.nonPulireNulla@false=no
+
+vegetazione.nonPulireProgettoDiritti@DESCRIZIONE=Alla pressione del pulsante "nuovo" non pulire progetto e diritti
+vegetazione.nonPulireProgettoDiritti@TIPO=boolean
+vegetazione.nonPulireProgettoDiritti@DEFAULT=false
+vegetazione.nonPulireProgettoDiritti@true=si
+vegetazione.nonPulireProgettoDiritti@false=no
+
+vegetazione.nonPulireRilevatori@DESCRIZIONE=Alla pressione del pulsante "nuovo" non pulire i rilevatori
+vegetazione.nonPulireRilevatori@TIPO=boolean
+vegetazione.nonPulireRilevatori@DEFAULT=false
+vegetazione.nonPulireRilevatori@true=si
+vegetazione.nonPulireRilevatori@false=no
+
+vegetazione.ordinamentoSpecie@DESCRIZIONE=Come ordinare le specie rilevate (non ancora implementata)
+vegetazione.ordinamentoSpecie@TIPO=enumerato
+vegetazione.ordinamentoSpecie@DEFAULT=valore
+vegetazione.ordinamentoSpecie@nome=per nome
+vegetazione.ordinamentoSpecie@valore=secondo l'abbondanza
+
+vegetazione.ordinamentoStratiAutomatico@DESCRIZIONE=Al momento ri recuperare un rilievo ordina automaticamente gli strati
+vegetazione.ordinamentoStratiAutomatico@TIPO=boolean
+vegetazione.ordinamentoStratiAutomatico@DEFAULT=false
+vegetazione.ordinamentoStratiAutomatico@true=si
+vegetazione.ordinamentoStratiAutomatico@false=no
+
+vegetazione.schemaStrati@DESCRIZIONE=Lo schema della stratificazione, non modificare manualmente. (Se questo schema è vuoto verrà usata una stratificazione standard in base al modello di stratificazione)
+vegetazione.schemaStrati@TIPO=stringa
+vegetazione.schemaStrati@DEFAULT=%1~alberi%2~arbusti%3~erbe%4~tallofite%5~alghe%6~lettiera%7~acqua%8~rocce
+vegetazione.schemaStrati@NASCONDI=true
+
+vegetazione.velocizzaTastiera@DESCRIZIONE=Velocizza l'immissione delle specie rilevate: se si preme invio nella casella dell'abbondanza la specie viene inserita
+vegetazione.velocizzaTastiera@TIPO=boolean
+vegetazione.velocizzaTastiera@DEFAULT=false
+vegetazione.velocizzaTastiera@true=si
+vegetazione.velocizzaTastiera@false=no
+
+
+
+# ------------------ preferenze per gli oggetti binari  ---------------------
+
+blob.database@DESCRIZIONE=Il database predefinito per gli oggetti binari
+blob.database@TIPO=stringa
+blob.database@PATTERN=[a-zA-Z0-9]*
+blob.database@DEFAULT=
+
+
+
+# ------------------ preferenze per gli sviluppatori  ---------------------
+
+devel.sbdLogEnabled@DESCRIZIONE=Abilita il log dei messaggi (scrive molti file in una cartella temporanea del sistema), da attivare se si è sicuri di quello che si sta facendo.
+devel.sbdLogEnabled@TIPO=boolean
+devel.sbdLogEnabled@DEFAULT=false
+devel.sbdLogEnabled@true=si
+devel.sbdLogEnabled@false=no
+
+devel.levelALL@DESCRIZIONE=Le classi di cui fare log di ogni messaggio, un elenco di nomi completamente qualificati separati da virgola.
+devel.levelALL@TIPO=stringa
+devel.levelALL@DEFAULT=
+
+devel.tmp@DESCRIZIONE=La cartella in cui salvare i file temporanei, "DEFAULT" è un valore speciale e identifica la cartella dei temporanei di default del sistema 
+devel.tmp@TIPO=stringa
+devel.tmp@DEFAULT=DEFAULT
+
+#STOP
+
+# tabella.put("vegetazione.sincronizzaAlberoAutomatico", new Dettagli("true")); // ::=true|false
+# tabella.put("vegetazione.sincronizzaListaAutomatico", new Dettagli("true")); // ::=true|false
+# tabella.put("vegetazione.sincronizzaSolamenteNuove", new Dettagli("true")); // ::=true|false
+
+# questa proprietà era presente ma non usata da nessuno
+# vegetazione.sincronizzaAlberoAutomatico@DESCRIZIONE=FIXME
+# vegetazione.sincronizzaAlberoAutomatico@TIPO=boolean
+# vegetazione.sincronizzaAlberoAutomatico@DEFAULT=false
+# vegetazione.sincronizzaAlberoAutomatico@true=si
+# vegetazione.sincronizzaAlberoAutomatico@false=no
+
