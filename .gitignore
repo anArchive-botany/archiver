@@ -5,3 +5,6 @@
 /.settings/
 .classpath
 .DS_Store
+
+#Roba di intellij
+.idea
