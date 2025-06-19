@@ -38,7 +38,6 @@
       <artifactId>odfdom-java</artifactId>
       <version>1.0.0-BETA1</version>
       <scope>compile</scope>
-      
       <exclusions>
         <exclusion>
           <!-- serve per evitare che "import javax.xml.parsers.SAXParser" provochi l'errore: -->
@@ -48,9 +47,13 @@
           <artifactId>xml-apis</artifactId>
         </exclusion>
       </exclusions> 
-      
     </dependency>
- 	
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.12.2</version>
+      <scope>test</scope>
+    </dependency>
 	</dependencies>
 	<build>
 		<plugins>

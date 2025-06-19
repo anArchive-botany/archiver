@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2020 studio Aspix 
+ * Copyright 2020 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,22 +11,23 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.nucleo;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.net.http.HttpClient.Version;
+import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpRequest.Builder;
+import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -58,13 +59,13 @@ import it.aspix.sbd.saxHandlers.SHSimpleBotanicalData;
 import it.aspix.sbd.util.AnalizzatoreDOM;
 
 /************************************************************************************************
- * il Comunicatore si occupa di trasformare tutte le richieste in stringhe XML 
+ * il Comunicatore si occupa di trasformare tutte le richieste in stringhe XML
  * e viceversa tutte le risposte in dati fruibili dal resto del programma
  ***********************************************************************************************/
 public class Comunicatore {
-    
+
     public static enum SuggerimentiGeografici {LOCALITA, COMUNE};
-    
+
     private static enum MetodoHttp { GET, POST, PUT, DELETE }; // TODO: e li devo definire io??
     private static final int TIMEOUT_CONNESSIONE = 10000;
 
@@ -72,17 +73,17 @@ public class Comunicatore {
     private String softwareName=null;
     /** viene usato per inviare al server la versione dell'applicaizone in uso */
     private String softwareVersion=null;
-    
+
     /** usato per la comunicazione con il server */
     private static HttpClient httpClient;
-    /** una volta recuperato il messaggio dal server 
+    /** una volta recuperato il messaggio dal server
      si usa lo stesso parser per analizzare la risposta */
     private SAXParser parserSAX;
     /** utilizzata per generare gli id degli oggetti */
     private SimpleDateFormat dateFormat;
     /** la cache accumula una serie di dati recuperati dal server */
     private Cache cache;
-    
+
     /** mappa on oggetto nel relativo servizio che lo gestisce */
     private static HashMap<Class<?>, String> mappaServizi = new HashMap<>();
     static {
@@ -115,15 +116,15 @@ public class Comunicatore {
         }
         cache = new Cache();
     }
-    
+
     /********************************************************************************************
-     * FIXME: "ApprossimaNomeSpecie" non esiste come servizio sul server 
+     * FIXME: "ApprossimaNomeSpecie" non esiste come servizio sul server
      *******************************************************************************************/
     public SimpleBotanicalData approssimaNome(String nome) throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData sbd = new SimpleBotanicalData();
         SimpleBotanicalData risposta;
         NameList nl = new NameList();
-        
+
         // poi si controlla se l'entrata è già presente in cache concatenando
         // il tipo siccome frammento potrebbe essere null
         risposta = (SimpleBotanicalData) cache.retrieveElement( ContenutoCache.NOME, nome);
@@ -144,15 +145,15 @@ public class Comunicatore {
         }
         return risposta;
     }
-    
+
     /********************************************************************************************
-     * FIXME: "ControllaElencoNomi" non esiste come servizio sul server 
+     * FIXME: "ControllaElencoNomi" non esiste come servizio sul server
      *******************************************************************************************/
     public SimpleBotanicalData controllaListaNomiSpecie(String nomi[]) throws SAXException, IOException, InterruptedException, URISyntaxException {
     	SimpleBotanicalData sbd = new SimpleBotanicalData();
         SimpleBotanicalData risposta;
         NameList nl = new NameList();
-        
+
         nl.setType("specieName");
         for(int i=0; i<nomi.length; i++){
         		nl.addName(nomi[i]);
@@ -163,7 +164,7 @@ public class Comunicatore {
         return risposta;
     }
 
-    
+
     /********************************************************************************************
      * Ricerca un elenco di nomi
      * @param tipoLista una delle costanti di it.aspix.sbd.obj.NameList
@@ -171,15 +172,15 @@ public class Comunicatore {
      * @param frammento usato per la ricerca
      * @param ancheInterno se true inserisce il suggerimento "internalSubstring"
      * @return un oggetto RispostaObject il cui campo oggetto contine un Vector
-     * @throws IOException 
-     * @throws SAXException 
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws IOException
+     * @throws SAXException
+     * @throws URISyntaxException
+     * @throws InterruptedException
      *******************************************************************************************/
     public SimpleBotanicalData recuperaNomi(String tipoLista, String contenutiIn, String frammento, boolean ancheInterno) throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData sbd = new SimpleBotanicalData();
         SimpleBotanicalData risposta;
-        
+
         risposta = (SimpleBotanicalData) cache.retrieveElement( ContenutoCache.NOME, tipoLista+contenutiIn+frammento);
         if (risposta == null) {
             // si procede con la richiesta verso il server
@@ -187,7 +188,7 @@ public class Comunicatore {
             if(frammento!=null) {
             		sb.append("&q=" + URLEncoder.encode(frammento, "UTF-8") );
             }
-            if(contenutiIn!=null) { 
+            if(contenutiIn!=null) {
             		sb.append("&container=" + URLEncoder.encode(contenutiIn, "UTF-8") );
             }
             if(ancheInterno) {
@@ -202,18 +203,18 @@ public class Comunicatore {
         }
         return risposta;
     }
-    
+
     /********************************************************************************************
      * Recupera le informazioni su tutti gli attributi disponibili
      * @return un oggetto RispostaObject il cui campo oggetto contine un Vector
-     * @throws IOException 
-     * @throws SAXException 
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws IOException
+     * @throws SAXException
+     * @throws URISyntaxException
+     * @throws InterruptedException
      *******************************************************************************************/
     public SimpleBotanicalData recuperaInformazioniAttributi() throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData risposta;
-        
+
         risposta = (SimpleBotanicalData) cache.retrieveElement( ContenutoCache.LISTA_ATTRIBUTI, "");
         if (risposta == null) {
             // FIXME sbd.setIdentity(getIdentity()); forse non serve più, ce ne sono altre in giro
@@ -225,14 +226,14 @@ public class Comunicatore {
         }
         return risposta;
     }
-    
+
     /********************************************************************************************
      * @param attributo di cui cercare il descrittore
      * @return il descrittore dell'attributo
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      *******************************************************************************************/
     public AttributeInfo getAttributeInfo(Attribute attributo) throws SAXException, IOException, InterruptedException, URISyntaxException{
         SimpleBotanicalData info;
@@ -257,13 +258,13 @@ public class Comunicatore {
      * @return l'ogggetto SimpleBotanicalData ricevuto dal server
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      *******************************************************************************************/
     public SimpleBotanicalData suggerimentiGeografici(String nome, SuggerimentiGeografici tipo) throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData risposta;
         String parametri;
-        
+
         if (tipo == SuggerimentiGeografici.LOCALITA) {
         	// TODO: qui e in altri punti quale è l'encoding da usare nelle URL?
         	parametri = "localita="+URLEncoder.encode(nome, "UTF-8");
@@ -280,10 +281,10 @@ public class Comunicatore {
         if(risposta.getPlace()!=null){
             cache.putElement((tipo == SuggerimentiGeografici.LOCALITA ? ContenutoCache.LOCALITA : ContenutoCache.COMUNE), nome, risposta);
         }
-        
+
         return risposta;
     }
-    
+
     /************************************************************************
      * @param epsg del punto da convertire
      * @param x
@@ -291,27 +292,27 @@ public class Comunicatore {
      * @return l'ogggetto SimpleBotanicalData ricevuto dal server
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      ***********************************************************************/
     public SimpleBotanicalData conversioneCoordinate(String epsg, String x, String y) throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData risposta;
         String parametri="x="+x+"&y="+y+"&rpsg="+epsg;
-        
+
         Stato.debugLog.fine("richiesta conversione");
         // TODO: anche qui si può usare la cache
         risposta = inviaRicevi("coordinateWGS84", parametri, null);
         return risposta;
     }
-    
-    
+
+
     /************************************************************************
      * Richiede i suggerimenti dal server e costruisce un vettore di stringhe
      * @return l'ogggetto SimpleBotanicalData ricevuto dal server
-     * @throws IOException 
-     * @throws SAXException 
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws IOException
+     * @throws SAXException
+     * @throws URISyntaxException
+     * @throws InterruptedException
      ***********************************************************************/
     public SimpleBotanicalData suggerimentiSpecie(String prefisso) throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData risposta;
@@ -333,8 +334,8 @@ public class Comunicatore {
 
         return risposta;
     }
-    
-    /* ***********************************************************************
+
+    /************************************************************************
      * @param nomeContenitore nei confronti del quale verificare i diritti
      * @return l'ogggetto SimpleBotanicalData ricevuto dal server
      * @throws SAXException
@@ -342,18 +343,18 @@ public class Comunicatore {
      ***********************************************************************/
     public Rights verificaAccessoContenitore(String nomeContenitore) throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData risposta;
-        
+
         risposta = (SimpleBotanicalData) cache.retrieveElement(ContenutoCache.ACCESSO_CONTENITORE, nomeContenitore);
         if(risposta==null){
-	        risposta = inviaRicevi(MetodoHttp.GET, "rights", null, 
-	                "user="+Proprieta.recupera("connessione.nome")+"&container="+nomeContenitore, false, null); 
+	        risposta = inviaRicevi(MetodoHttp.GET, "rights", null,
+	                "user="+Proprieta.recupera("connessione.nome")+"&container="+nomeContenitore, false, null);
 	        cache.putElement(ContenutoCache.ACCESSO_CONTENITORE, nomeContenitore, risposta);
         }
         return risposta.getRights(0);
     }
-    
+
     // FIXME: mancano commenti di intestazione e usa un meccanismo atipico, sarebbe bene rifarla
-    public boolean login() throws URISyntaxException, IOException, InterruptedException{    
+    public boolean login() throws URISyntaxException, IOException, InterruptedException{
         String url = Proprieta.recupera("connessione.URL")+"/login";
         System.out.println(url);
         HttpRequest request = HttpRequest.newBuilder()
@@ -366,14 +367,14 @@ public class Comunicatore {
 
         return response.statusCode() == 200;
     }
-    
+
     /************************************************************************
      * @param nomeContenitore di cui si vogliono avere le informazioni
      * @return l'ogggetto SimpleBotanicalData ricevuto dal server
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      ***********************************************************************/
     public SimpleBotanicalData informazioniContenitore(String nomeContenitore) throws SAXException, IOException, InterruptedException, URISyntaxException {
         SimpleBotanicalData risposta;
@@ -385,15 +386,15 @@ public class Comunicatore {
         }
         return risposta;
     }
-    
+
     /************************************************************************
      * @param o l'oggetto da cercare
      * @param suggerimento da inviare al server per la ricerca
      * @return la risposta del server
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws InvalidValue
      ***********************************************************************/
     public SimpleBotanicalData cercaVecchio(OggettoSBD o, String suggerimento) throws SAXException, IOException, IllegalArgumentException, InterruptedException, URISyntaxException {
@@ -439,21 +440,21 @@ public class Comunicatore {
         	}
         	return risposta;
     }
-    
+
     // FIXME: ignora il suggerimento
     public SimpleBotanicalData cerca(OggettoSBD o, String suggerimento) throws Exception {
-        
+
             SimpleBotanicalData risposta;
             // TODO: saltata implementazione cache, da rifare
 
             String servizio = mappaServizi.get(o.getClass())+"/cerca";
-            System.out.println("=========================>"+servizio);
+            System.out.println("**=========================>"+servizio);
             String parametriURL = ReflectUtil.getHttpQueryString(o);
-            
+
             risposta = inviaRicevi(MetodoHttp.GET, servizio, null, parametriURL, false, null);
             return risposta;
     }
-    
+
     /************************************************************************
      * @param o l'oggetto da inserire
      * @param suggerimento da inviare al server per l'inserimento
@@ -461,14 +462,14 @@ public class Comunicatore {
      * @return la risposta del server
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws InvalidValue
      ***********************************************************************/
     public SimpleBotanicalData inserisci(OggettoSBD o, String suggerimento, boolean simulazione) throws SAXException, IOException, IllegalArgumentException, InterruptedException, URISyntaxException {
         SimpleBotanicalData richiesta = new SimpleBotanicalData();
         SimpleBotanicalData risposta;
-        
+
         // richiesta.setIdentity(getIdentity());
         if(o instanceof Specimen){
             richiesta.addSpecimen((Specimen)o);
@@ -479,16 +480,16 @@ public class Comunicatore {
             // XXX: è drastico
             cache.rimuoviTutti(ContenutoCache.SPECIE_INFO);
         }else if(o instanceof Blob){
-            richiesta.addBlob((Blob)o);        
+            richiesta.addBlob((Blob)o);
         }else if(o instanceof Link){
-            richiesta.addLink((Link)o);        
+            richiesta.addLink((Link)o);
         }else{
             throw new IllegalArgumentException("Non posso inserire "+o.getClass().getCanonicalName());
         }
         risposta = inviaRicevi(MetodoHttp.POST, mappaServizi.get(o.getClass()), null, suggerimento, simulazione, richiesta);
         return risposta;
     }
-    
+
     /************************************************************************
      * @param o l'oggetto da modificare
      * @param suggerimento da inviare al server per la modifica
@@ -496,19 +497,19 @@ public class Comunicatore {
      * @return la risposta del server
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws InvalidValue
      ***********************************************************************/
     public SimpleBotanicalData modifica(OggettoSBD o, String suggerimento, boolean simulazione) throws SAXException, IOException, IllegalArgumentException, InterruptedException, URISyntaxException {
         SimpleBotanicalData richiesta = new SimpleBotanicalData();
         SimpleBotanicalData risposta;
         String idOggetto;
-        
+
         // richiesta.setIdentity(getIdentity());
         if(o instanceof Specimen){
             richiesta.addSpecimen((Specimen)o);
-            idOggetto = ((Specimen)o).getId();         
+            idOggetto = ((Specimen)o).getId();
         }else if(o instanceof Sample){
             richiesta.addSample((Sample)o);
             idOggetto = ((Sample)o).getId();
@@ -518,17 +519,17 @@ public class Comunicatore {
             // XXX: è drastico
             cache.rimuoviTutti(ContenutoCache.SPECIE_INFO);
         }else if(o instanceof Blob){
-            richiesta.addBlob((Blob)o);     
+            richiesta.addBlob((Blob)o);
             idOggetto = ((Blob)o).getId();
         }else{
             throw new IllegalArgumentException("Non posso inserire "+o.getClass().getCanonicalName());
         }
-      
+
         // FIXME: i suggerimenti qui vengono inseriti male, o si sistema qui o in invia/ricevi
         risposta = inviaRicevi(MetodoHttp.PUT, mappaServizi.get(o.getClass()), idOggetto, suggerimento, simulazione, richiesta);
         return risposta;
     }
-    
+
     /************************************************************************
      * @param o l'oggetto da rimuovere
      * @param suggerimento da inviare al server per la rimozione
@@ -536,15 +537,15 @@ public class Comunicatore {
      * @return la risposta del server
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      * @throws InvalidValue
      ***********************************************************************/
     public SimpleBotanicalData rimuovi(OggettoSBD o, String suggerimento, boolean simulazione) throws SAXException, IOException, IllegalArgumentException, InterruptedException, URISyntaxException {
         SimpleBotanicalData richiesta = new SimpleBotanicalData();
         SimpleBotanicalData risposta;
         String idOggetto;
-        
+
         // richiesta.setIdentity(getIdentity());
         if(o instanceof Specimen){
             richiesta.addSpecimen((Specimen)o);
@@ -569,15 +570,15 @@ public class Comunicatore {
         risposta = inviaRicevi(MetodoHttp.DELETE, mappaServizi.get(o.getClass()), idOggetto, suggerimento, simulazione, richiesta);
         return risposta;
     }
-    
-    
+
+
     // ######################################################################
     // METODI DI UTILITÀ METODI DI UTILITÀ METODI DI UTILITÀ METODI DI UTILIT
     // ETODI DI UTILITÀ METODI DI UTILITÀ METODI DI UTILITÀ METODI DI UTILITÀ
     // ######################################################################
-    
+
     /************************************************************************
-     * Metodo ponte per l'accesso alla cache, a volte un editor può con 
+     * Metodo ponte per l'accesso alla cache, a volte un editor può con
      * maggiore facilità sapere se una entrata è da rimuovere
      * @param type
      * @param name il nome della chiave nella cache
@@ -585,24 +586,24 @@ public class Comunicatore {
     public void rimuoviDallaCache(ContenutoCache type, String name){
         cache.removeElement(type, name);
     }
-    
+
     /************************************************************************
      * richiest a GET senza idOggetto ne simulazione ne entity
      * @param pathServizio
      * @param parametri
      * @param oggetto da inviare al server
-     * @return il valore ritornato da inviaRicevi(HttpGet.METHOD_NAME, pathServizio, null, parametri, false, entity) 
+     * @return il valore ritornato da inviaRicevi(HttpGet.METHOD_NAME, pathServizio, null, parametri, false, entity)
      * @throws SAXException
      * @throws IOException
-     * @throws URISyntaxException 
-     * @throws InterruptedException 
+     * @throws URISyntaxException
+     * @throws InterruptedException
      ***********************************************************************/
     private SimpleBotanicalData inviaRicevi(
     		String pathServizio, String parametri, SimpleBotanicalData entity
     	) throws SAXException, IOException, InterruptedException, URISyntaxException {
     		return inviaRicevi(MetodoHttp.GET , pathServizio, null, parametri, false, null);
     }
-    
+
     /************************************************************************
      * Gestisce la comunicazione con il server, la URL richiesta sarà
      * pathServizio[/idOggetto][?parametri][[&]simulation=true]
@@ -616,15 +617,15 @@ public class Comunicatore {
      * @throws SAXException
      * @throws IOException
      * FIXME: parametri dovrebbe essere una lista e l'encoding si dovrebbe fare qui
-     * @throws InterruptedException 
-     * @throws URISyntaxException 
+     * @throws InterruptedException
+     * @throws URISyntaxException
      ***********************************************************************/
     private SimpleBotanicalData inviaRicevi(
-            MetodoHttp metodoHttp, String pathServizio, String idOggetto, String parametri,  
+            MetodoHttp metodoHttp, String pathServizio, String idOggetto, String parametri,
     		boolean simulazione, SimpleBotanicalData entity
     	) throws SAXException, IOException, InterruptedException, URISyntaxException {
             String id = "m" + dateFormat.format(new Date()) + "_" + Proprieta.recupera("connessione.nome");
-            String url = Proprieta.recupera("connessione.URL") 
+            String url = Proprieta.recupera("connessione.URL")
                     + "/ws/" + pathServizio + (idOggetto != null ? "/" + idOggetto : "")
                     + (parametri != null ? "?" + parametri : "")
                     + (simulazione ? (parametri != null ? "&" : "") + "simulation=true" : "");
@@ -632,12 +633,12 @@ public class Comunicatore {
                     .encode((Proprieta.recupera("connessione.nome") + ":" + Proprieta.recupera("connessione.password"))
                             .getBytes()));
         long inizio;
-        
+
         // imposto l'id dell'oggetto (utile per debug)
         if(entity!=null) {
             entity.setId(id);
         }
-                 
+
         Stato.debugLog.fine("URL richiesta:" + url);
         inizio = System.currentTimeMillis();
 
@@ -663,14 +664,14 @@ public class Comunicatore {
             rb = rb.DELETE();
             break;
         }
-        
-        HttpRequest request = rb.build();      
-        
+
+        HttpRequest request = rb.build();
+
         System.out.println("===============================================================");
         System.out.println(request.toString());
         System.out.println("===============================================================");
         HttpResponse<String> risposta = httpClient.send(request, BodyHandlers.ofString());
-        
+
         if(Proprieta.isTrue("devel.sbdLogEnabled")){
             try {
                 String pathTmp = getTempFile(id+".co.xml");
@@ -682,28 +683,32 @@ public class Comunicatore {
             	Stato.debugLog.throwing(this.getClass().getName(), "inviaRicevi", e);
             }
         }
-        
+
         // legge la risposta dallo stream di input
         Stato.debugLog.finer("Content-Type=" + risposta.headers().firstValue("Content-Type").get());
         Stato.debugLog.finest("Tempo di comunicazione:" + (System.currentTimeMillis() - inizio));
-      
+
         // analizzo la risposta
-        InputSource is = new InputSource(new StringReader( risposta.body() ));
+        String corpo = risposta.body();
+        InputSource is = new InputSource(new StringReader( corpo ));
         SHSimpleBotanicalData handler = new SHSimpleBotanicalData();
         parserSAX.parse(is, handler);
         if(Proprieta.isTrue("devel.sbdLogEnabled")){
             try {
                 String pathTmp = getTempFile(id+".ci.xml");
-                // XXX: AnalizzatoreDOM.analizzaSuFile(handler.getSimpleBotanicalData(), Proprieta.recupera("pathSchema"), pathTmp);
-                AnalizzatoreDOM.analizzaSuFile(handler.getSimpleBotanicalData(), pathTmp);
+                FileWriter fw = new FileWriter(pathTmp);
+                fw.write(corpo);
+                fw.close();
+                // TODO: forse vecchio adesso par cancellare il contenutyo del file
+                // AnalizzatoreDOM.analizzaSuFile(handler.getSimpleBotanicalData(), pathTmp);
             } catch (Exception e) {
             	Stato.debugLog.throwing(this.getClass().getName(), "inviaRicevi", e);
             }
         }
-        
+
         return handler.getSimpleBotanicalData();
     }
-    
+
 	public static String getTempFile(String nome) {
 		String v = Proprieta.recupera("devel.tmp");
 		File f;
@@ -726,5 +731,5 @@ public class Comunicatore {
 		nomeDefinititvo = v + nome;
 		return nomeDefinititvo;
     }
-    
+
 }
