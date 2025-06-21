@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  ***************************************************************************/
-package it.aspix.archiver.test;
+package it.aspix.archiver.testmanuali;
 
 import it.aspix.archiver.CostruttoreOggetti;
 import it.aspix.archiver.UtilitaGui;

@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver;
 
@@ -196,13 +196,13 @@ public class Utilita {
         }
         return codice;
     }
-    
+
     /************************************************************************
      * @param s il dato da formattare
      * @param modo "gps" "gradiPrimi" o altro
      * @param negativo la stringa suffisso per i valori negativi
      * @param positivo la stringa suffisso per i valori positivi
-     * @param separatoreDecimale 
+     * @param separatoreDecimale
      ***********************************************************************/
     public static final String formattaCoordinata(String s, String modo, String negativo, String positivo, DecimalFormatSymbols separatoreDecimale){
         if(modo.equals("gps") && s!=null){
@@ -232,7 +232,7 @@ public class Utilita {
                 convertito=-convertito; // non pu� essere minore di zero
             DecimalFormat df = new DecimalFormat("##.####");
             df.setDecimalFormatSymbols(separatoreDecimale);
-            return gradi+"\u00b0 "+df.format(convertito)+"' "+emisfero; 
+            return gradi+"\u00b0 "+df.format(convertito)+"' "+emisfero;
         }else{
             // l'unica altra modalita' possibile e' quella numerica
             return s;
@@ -248,13 +248,13 @@ public class Utilita {
     public static boolean uguale(String a, String b){
         if(a==null && b==null)
             return true;
-            
+
         if(a==null && b!=null)
             return false;
-        
+
         if(a!=null && b==null)
             return false;
-            
+
         return a.equals(b);
     }
 
@@ -267,10 +267,10 @@ public class Utilita {
     public static boolean ugualeIgnoraVuote(String a, String b){
         String cfr1=(a==null? "" : a);
         String cfr2=(b==null? "" : b);
-                    
+
         return cfr1.equals(cfr2);
     }
-    
+
     /************************************************************************
      * Utile per il debug
      * @param livello un array anche con elementi null
@@ -312,11 +312,11 @@ public class Utilita {
             Stato.debugLog.fine("stringa letta:"+risultato);
         }catch(Exception ex){
             risultato = predefinito;
-            Stato.debugLog.throwing(Stato.class.getCanonicalName(), "leggiStringa", ex);
+            Stato.debugLog.fine("Uso il default per \""+nomeFile+"\"");
         }
         return risultato;
     }
-    
+
     /************************************************************************
      * @param s1
      * @param s2
@@ -325,7 +325,7 @@ public class Utilita {
     public static final String coalesce(String s1, String s2){
         return s1!=null ? s1 : s2;
     }
- 
+
     /************************************************************************
      * fornisce una spiegazione discorsiva di una eccezione
      * @param ex l'eccezione da descrivere

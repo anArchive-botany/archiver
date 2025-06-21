@@ -5,10 +5,10 @@
 	<groupId>it.aspix</groupId>
 	<artifactId>archiver</artifactId>
 	<packaging>jar</packaging>
-	<version>5.99.0</version>
+	<version>5.99.1</version>
 	<name>archiver</name>
 	<url>http://www.anarchive.it</url>
-	
+
 	<properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <progetto.jars>${project.build.directory}/lib</progetto.jars>

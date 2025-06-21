@@ -56,7 +56,7 @@ import it.aspix.sbd.obj.SpecieRef;
 import it.aspix.sbd.obj.SpecieSpecification;
 import it.aspix.sbd.obj.Specimen;
 import it.aspix.sbd.saxHandlers.SHSimpleBotanicalData;
-import it.aspix.sbd.util.AnalizzatoreDOM;
+import it.aspix.sbd.AnalizzatoreDOM;
 
 /************************************************************************************************
  * il Comunicatore si occupa di trasformare tutte le richieste in stringhe XML
@@ -160,7 +160,8 @@ public class Comunicatore {
         }
         // sbd.setIdentity(getIdentity());
         sbd.addNameList(nl);
-        risposta = inviaRicevi("ControllaElencoNomi", null, sbd);
+        risposta = inviaRicevi(MetodoHttp.POST,"nomiSpecie/list", null, null, false, sbd);
+
         return risposta;
     }
 
@@ -356,7 +357,7 @@ public class Comunicatore {
     // FIXME: mancano commenti di intestazione e usa un meccanismo atipico, sarebbe bene rifarla
     public boolean login() throws URISyntaxException, IOException, InterruptedException{
         String url = Proprieta.recupera("connessione.URL")+"/login";
-        System.out.println(url);
+        Stato.debugLog.fine(url);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(url))
                 .header("Accept", "application/xml")
@@ -443,14 +444,11 @@ public class Comunicatore {
 
     // FIXME: ignora il suggerimento
     public SimpleBotanicalData cerca(OggettoSBD o, String suggerimento) throws Exception {
-
             SimpleBotanicalData risposta;
             // TODO: saltata implementazione cache, da rifare
 
             String servizio = mappaServizi.get(o.getClass())+"/cerca";
-            System.out.println("**=========================>"+servizio);
             String parametriURL = ReflectUtil.getHttpQueryString(o);
-
             risposta = inviaRicevi(MetodoHttp.GET, servizio, null, parametriURL, false, null);
             return risposta;
     }
@@ -666,16 +664,11 @@ public class Comunicatore {
         }
 
         HttpRequest request = rb.build();
-
-        System.out.println("===============================================================");
-        System.out.println(request.toString());
-        System.out.println("===============================================================");
         HttpResponse<String> risposta = httpClient.send(request, BodyHandlers.ofString());
 
         if(Proprieta.isTrue("devel.sbdLogEnabled")){
             try {
                 String pathTmp = getTempFile(id+".co.xml");
-                System.out.println("--------------------------------------"+pathTmp);
                 Stato.debugLog.info("Registro nel file "+pathTmp);
                 // XXX: AnalizzatoreDOM.analizzaSuFile(oggetto, Proprieta.recupera("pathSchema"),pathTmp);
                 AnalizzatoreDOM.analizzaSuFile(entity, pathTmp);

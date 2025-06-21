@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver;
 
@@ -24,9 +24,9 @@ import it.aspix.archiver.eventi.ProprietaCambiataListener;
 import it.aspix.archiver.nucleo.Proprieta;
 
 /****************************************************************************
- * Questa classe si occupa di filtrare i messaggi di log che vanno 
+ * Questa classe si occupa di filtrare i messaggi di log che vanno
  * visualizzati.
- * 
+ *
  * @author Edoardo Panfili, studio Aspix
  ***************************************************************************/
 public class FiltroLog implements Filter, ProprietaCambiataListener{
@@ -35,16 +35,16 @@ public class FiltroLog implements Filter, ProprietaCambiataListener{
     static {
     	debugLevel=new java.util.Hashtable<String,Level>();
     }
-    
+
     /************************************************************************
      * il costruttore (non vengono costruiti molti oggetti di questo tipo)
-     * reinizializza i livelli e poi si registra come ascoltatore dei cambiamenti 
+     * reinizializza i livelli e poi si registra come ascoltatore dei cambiamenti
      ***********************************************************************/
     public FiltroLog(){
     	initLevels();
     	Proprieta.addProprietaCambiataListener(this);
     }
-    
+
     /************************************************************************
      * intercetta i cambiamenti delle proprietà
      ***********************************************************************/
@@ -53,7 +53,7 @@ public class FiltroLog implements Filter, ProprietaCambiataListener{
 			initLevels();
 		}
 	}
-    
+
 	/************************************************************************
 	 * Ricostruisce la tabella dei livelli di log
 	 ***********************************************************************/
@@ -73,7 +73,7 @@ public class FiltroLog implements Filter, ProprietaCambiataListener{
     }
 
     public boolean isLoggable(LogRecord record) {
-    	if(record.getLevel().intValue()>=Level.SEVERE.intValue()){
+    	if(record.getLevel().intValue()>=Level.SEVERE.intValue() || record.getThrown()!=null ){
     		return true;
     	}
         Object dl = debugLevel.get(record.getSourceClassName());
