@@ -118,35 +118,6 @@ public class Comunicatore {
     }
 
     /********************************************************************************************
-     * FIXME: "ApprossimaNomeSpecie" non esiste come servizio sul server
-     *******************************************************************************************/
-    public SimpleBotanicalData approssimaNome(String nome) throws SAXException, IOException, InterruptedException, URISyntaxException {
-        SimpleBotanicalData sbd = new SimpleBotanicalData();
-        SimpleBotanicalData risposta;
-        NameList nl = new NameList();
-
-        // poi si controlla se l'entrata è già presente in cache concatenando
-        // il tipo siccome frammento potrebbe essere null
-        risposta = (SimpleBotanicalData) cache.retrieveElement( ContenutoCache.NOME, nome);
-        if (risposta == null) {
-            // si procede con la richiesta verso il server
-            nl.setType("specieName");
-            nl.addName(nome);
-            // sbd.setIdentity(getIdentity());
-            sbd.addNameList(nl);
-            // FIXME: quello qui sotto  non esiste su server
-            // lo usano gli importatori non direttamente archiver
-            risposta = inviaRicevi("ApprossimaNomeSpecie", null, sbd);
-            if(risposta.getNameList()!=null){
-                cache.putElement(ContenutoCache.NOME, nome, risposta);
-            }
-        }else{
-            Stato.debugLog.fine("prendo il nome dalla cache");
-        }
-        return risposta;
-    }
-
-    /********************************************************************************************
      * FIXME: "ControllaElencoNomi" non esiste come servizio sul server
      *******************************************************************************************/
     public SimpleBotanicalData controllaListaNomiSpecie(String nomi[]) throws SAXException, IOException, InterruptedException, URISyntaxException {
