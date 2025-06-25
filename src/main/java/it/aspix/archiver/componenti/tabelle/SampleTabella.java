@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.componenti.tabelle;
 
@@ -32,7 +32,7 @@ public class SampleTabella extends OggettoPerTabella{
     private Place scorciatoiaPlace;
     private DirectoryInfo scorciatoiaDI;
     private static final SampleTabella perRecuperoDati = new SampleTabella();
-    
+
     private SampleTabella(){
     }
 
@@ -45,11 +45,11 @@ public class SampleTabella extends OggettoPerTabella{
             scorciatoiaDI = rilievo.getDirectoryInfo();
         }
     }
-    
+
     public Sample getPlot(){
         return rilievo;
     }
-    
+
     /************************************************************************
      * @param n la colonna che interessa
      * @return il nome della colonna
@@ -57,7 +57,7 @@ public class SampleTabella extends OggettoPerTabella{
     public String getColumnHeader(int n){
         return (String) perRecuperoDati.eseguiOperazione(HEADER, n, null);
     }
-    
+
     /************************************************************************
      * @param n la colonna che interessa
      * @return l'ampiezza della colonna
@@ -65,22 +65,22 @@ public class SampleTabella extends OggettoPerTabella{
     public static int getColumnPreferredWidth(int n){
         return ((Integer) perRecuperoDati.eseguiOperazione(WIDTH, n, null)).intValue();
     }
-    
+
     public String toString(){
         DirectoryInfo di = new DirectoryInfo();
         return di.getContainerName()+"#"+di.getContainerSeqNo()+", "+
                 di.getSubContainerName()+"#"+di.getSubContainerSeqNo()+" ->"+
                 rilievo.getCommunity();
     }
-    
+
     public Object getColumn(int n){
         return eseguiOperazione(READ, n, null);
     }
-    
+
     public void setColumn(int n, Object o){
         eseguiOperazione(WRITE, n, o);
     }
-    
+
     private static final byte HEADER = 0;
     private static final byte WIDTH = 1;
     private static final byte READ = 2;
@@ -97,59 +97,59 @@ public class SampleTabella extends OggettoPerTabella{
         case 0:
             if(op==HEADER){     return "num";}
             else if(op==WRITE){ return null; }
-            else if(op==READ) { return new Integer(numeroRiga);  }
-            else {              return new Integer(40);}
+            else if(op==READ) { return Integer.valueOf(numeroRiga);  }
+            else {              return Integer.valueOf(40);}
         case 1:
             if(op==HEADER){     return "progetto";}
             else if(op==WRITE){ return null; }
             else if(op==READ) { return scorciatoiaDI.getContainerName();  }
-            else {              return new Integer(80);}
+            else {              return Integer.valueOf(80);}
         case 2:
             if(op==HEADER){     return "#progetto";}
             else if(op==WRITE){ return null; }
-            else if(op==READ) { return scorciatoiaDI.getContainerSeqNo();  }   
-            else if(op==READ) { return new Integer(40);}
+            else if(op==READ) { return scorciatoiaDI.getContainerSeqNo();  }
+            else{ 				return Integer.valueOf(40);}
         case 3:
             if(op==HEADER){     return "id prog.";}
             else if(op==WRITE){ return null; }
-            else if(op==READ) { return scorciatoiaDI.getContainerExternalId();  }   
-            else if(op==READ) { return new Integer(40);}
+            else if(op==READ) { return scorciatoiaDI.getContainerExternalId();  }
+            else if(op==READ) { return Integer.valueOf(40);}
         case 4:
             if(op==HEADER){     return "subProj";}
             else if(op==WRITE){ return null; }
             else if(op==READ) { return scorciatoiaDI.getSubContainerName();  }
-            else {              return new Integer(80);}
+            else {              return Integer.valueOf(80);}
         case 5:
             if(op==HEADER){     return "#subProj";}
             else if(op==WRITE){ return null; }
             else if(op==READ) { return scorciatoiaDI.getSubContainerSeqNo();  }
-            else {              return new Integer(40);}
+            else {              return Integer.valueOf(40);}
         case 6:
             if(op==HEADER){     return "id sottop.";}
             else if(op==WRITE){ return null; }
-            else if(op==READ) { return scorciatoiaDI.getSubContainerExternalId();  }   
-            else if(op==READ) { return new Integer(60);}
+            else if(op==READ) { return scorciatoiaDI.getSubContainerExternalId();  }
+            else if(op==READ) { return Integer.valueOf(60);}
         case 7:
             if(op==HEADER){     return "legit";}
             else if(op==WRITE){ return null; }
             else if(op==READ) { return rilievo.getSurveyer();}
-            else {              return new Integer(100);}
+            else {              return Integer.valueOf(100);}
         case 8:
             if(op==HEADER){     return "località";}
             else if(op==WRITE){ return null; }
             else if(op==READ) { return scorciatoiaPlace.getName(); }
-            else {              return new Integer(150);}
+            else {              return Integer.valueOf(150);}
         case 9:
             if(op==HEADER){     return "comune";}
             else if(op==WRITE){ return null; }
             else if(op==READ) { return scorciatoiaPlace.getTown(); }
-            else {              return new Integer(100);}
+            else {              return Integer.valueOf(100);}
         default:
             return null;
         }
     }
     public static final int NUMERO_COLONNE = 10;
-    
+
     /***************************************************************************
      * Converte nella rappresentazione standard del Plot
      **************************************************************************/

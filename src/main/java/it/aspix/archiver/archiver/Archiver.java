@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.archiver;
 
@@ -41,31 +41,30 @@ import it.aspix.archiver.nucleo.Stato;
 
 /*****************************************************************************
  * La classe che va lanciata quando l'utente fa click sul jar.
- * si occupa dell'inizializzazione di tutta l'applicazione 
+ * si occupa dell'inizializzazione di tutta l'applicazione
  * @author Edoardo Panfili, studio Aspix
  ****************************************************************************/
 public class Archiver {
     public static void main(String[] args) {
         UIManager.put("TabbedPane.contentOpaque",false);
-        
+
 		Stato.debugLog.finest("Avvio Archiver");
         System.setProperty("com.apple.mrj.application.apple.menu.about.name","archiver");
         System.setProperty("apple.laf.useScreenMenuBar", "true");
-       
+
         try {
 	        Taskbar tb = Taskbar.getTaskbar();
 	        InputStream is = Archiver.class.getResourceAsStream("/it/aspix/archiver/icone/anArchive_doc.png");
-	        System.out.println(is);
 	        Image i = ImageIO.read( is );
 	        tb.setIconImage(i);
         }catch(IOException | IllegalArgumentException e) {
         	// do nothing
         	e.printStackTrace();
         }
-        
+
         AperturaApplicazione attesaApertura = new AperturaApplicazione(
             Icone.splash,
-            "Versione "+Stato.versione+" http://www.anarchive.it", 
+            "Versione "+Stato.versione+" http://www.anarchive.it",
             Color.WHITE,
             5
         );
@@ -83,13 +82,13 @@ public class Archiver {
         // FIXME: commentate due righe e aggiunte quelle sotto per semplificare i test iniziali
         attesaApertura.chiediPassword();
         attesaApertura.aggiornaConnessione();
-        
+
         Proprieta.check();
-        
+
         Comunicatore comunicatore=new Comunicatore("archiver", Stato.versione);
         Stato.comunicatore = comunicatore;
         // controllo i diritti di accesso
-        
+
         attesaApertura.setAvanzamento("Chiedo verifica diritti di accesso...",3);
         boolean esito;
         String messaggioErrore = "Utente non riconosciuto";
@@ -104,13 +103,13 @@ public class Archiver {
             UtilitaGui.mostraMessaggioAndandoACapo(messaggioErrore, "errore", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-          
+
         //apre la finestra degli aggiornamenti (che si apre solo se serve)
         ComunicazioneAggiornamenti da = new ComunicazioneAggiornamenti(Stato.versione);
         da.setVisible(true);
         //apre la finestra principale
         attesaApertura.setAvanzamento("Creo la finestra principale...",4);
-        
+
         // imposto l'aspetto dell'interfaccia
         String nomeLaF = Proprieta.recupera("generale.aspettoInterfaccia");
         if(!nomeLaF.equals("nativo")){
@@ -129,9 +128,9 @@ public class Archiver {
         	    e.printStackTrace();
         	}
         }
-        
+
         JFrame fv = new FinestraArchiver();
-        
+
         attesaApertura.setVisible(false);
         attesaApertura.dispose();
         attesaApertura.setAvanzamento("Avvio completato",5);

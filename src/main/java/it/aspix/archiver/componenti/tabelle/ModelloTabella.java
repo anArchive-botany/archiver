@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.componenti.tabelle;
 
@@ -62,7 +62,7 @@ public class ModelloTabella<T extends OggettoPerTabella > implements TableModel 
 
     /** Adds a listener to the list that is notified each time a change to the data model occurs. */
     public void addTableModelListener(TableModelListener l){
-        ; //System.out.println("Richiesta 'addTableModelListener'... IGNORATA");
+        ; // non implemento la lista degli ascoltatori per il tableModel
     }
 
     /** Returns the most specific superclass for all the cell values in the column. **/
@@ -104,7 +104,7 @@ public class ModelloTabella<T extends OggettoPerTabella > implements TableModel 
     public boolean isCellEditable(int rowIndex, int columnIndex){
         return editable && columnIndex>1;
     }
-    
+
     private boolean editable=false;
     public boolean isEditable() {
         return editable;
@@ -115,7 +115,7 @@ public class ModelloTabella<T extends OggettoPerTabella > implements TableModel 
 
     /** Removes a listener from the list that is notified each time a change to the data model occurs. */
     public void removeTableModelListener(TableModelListener l){
-        ; //System.out.println("Richiesta 'removeTableModelListener'... IGNORATA");
+        ; // non implemento la lista degli ascoltatori per il tableModel
     }
 
     /** Sets the value in the cell at columnIndex and rowIndex to aValue. */

@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.editor;
 
@@ -48,13 +48,13 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class SampleEditorSintetico extends SampleEditor {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     VincoliSpeciePresenti vsp; // creata in pannelloRilievoSemplificato()
     private Level strati[];
     private String scalaAbbondanza;
-    
+
     GridBagLayout   lPannelloGenerale = new GridBagLayout();
     JPanel          pannelloGenerale = new JPanel(lPannelloGenerale);
     JLabel          eComunita = new JLabel();
@@ -65,25 +65,25 @@ public class SampleEditorSintetico extends SampleEditor {
     JTextField      progrProgetto = new JTextField();
     JLabel          eIdProgetto = new JLabel();
     JTextField      idProgetto = new JTextField();
-    
+
     JLabel          eSottoprogetto = new JLabel();
     JTextField      sottoprogetto = new JTextField();
     JLabel          eProgrSottoprogetto = new JLabel();
     JTextField      progrSottoprogetto = new JTextField();
     JLabel          eIdSottoprogetto = new JLabel();
     JTextField      idSottoprogetto = new JTextField();
-    
+
     JLabel          eRilevatore = new JLabel();
-    JTextField      rilevatore = new JTextField();  
+    JTextField      rilevatore = new JTextField();
     JLabel          eLocalita = new JLabel();
-    JTextField      localita = new JTextField();    
+    JTextField      localita = new JTextField();
     JLabel          eComune = new JLabel();
     JTextField      comune = new JTextField();
     JLabel          eRegione = new JLabel();
     JTextField      regione = new JTextField();
-    
+
     JButton         specieConstraints = new JButton();
-    
+
     public SampleEditorSintetico(){
         super();
         vsp = new VincoliSpeciePresenti();
@@ -103,7 +103,7 @@ public class SampleEditorSintetico extends SampleEditor {
         // ---------- inserimento nei pannelli ----------
         this.setLayout(new BorderLayout());
         this.add(pannelloGenerale,BorderLayout.NORTH);
-        
+
         pannelloGenerale.add(eComunita,             new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
         pannelloGenerale.add(comunita,              new GridBagConstraints(1, 0, 3, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
         pannelloGenerale.add(eProgetto,             new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
@@ -112,14 +112,14 @@ public class SampleEditorSintetico extends SampleEditor {
         pannelloGenerale.add(progrProgetto,         new GridBagConstraints(3, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 50, 0));
         pannelloGenerale.add(eIdProgetto,           new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
         pannelloGenerale.add(idProgetto,            new GridBagConstraints(1, 2, 3, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
-        
+
         pannelloGenerale.add(eSottoprogetto,        new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
         pannelloGenerale.add(sottoprogetto,         new GridBagConstraints(1, 3, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
         pannelloGenerale.add(eProgrSottoprogetto,   new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
         pannelloGenerale.add(progrSottoprogetto,    new GridBagConstraints(3, 3, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
         pannelloGenerale.add(eIdSottoprogetto,      new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
         pannelloGenerale.add(idSottoprogetto,       new GridBagConstraints(1, 4, 3, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
-        
+
         pannelloGenerale.add(eRilevatore,           new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
         pannelloGenerale.add(rilevatore,            new GridBagConstraints(1, 5, 3, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
         pannelloGenerale.add(eLocalita,             new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
@@ -128,7 +128,7 @@ public class SampleEditorSintetico extends SampleEditor {
         pannelloGenerale.add(comune,                new GridBagConstraints(1, 7, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
         pannelloGenerale.add(eRegione,              new GridBagConstraints(2, 7, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,   GridBagConstraints.NONE,        CostantiGUI.insetsEtichetta, 0, 0));
         pannelloGenerale.add(regione,               new GridBagConstraints(3, 7, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
-        
+
         pannelloGenerale.add(specieConstraints,     new GridBagConstraints(1, 8, 3, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,  CostantiGUI.insetsDatoTesto, 0, 0));
         // ---------- ascoltatori ----------
         specieConstraints.addActionListener(new java.awt.event.ActionListener() {
@@ -141,10 +141,10 @@ public class SampleEditorSintetico extends SampleEditor {
         if(Stato.isMacOSX){
             specieConstraints.setOpaque(false);
         }
-        
+
         progetto.setText(Proprieta.recupera("vegetazione.database"));
     }
-    
+
     /************************************************************************
      * L'immissione dei vincoli per le specie presenti
      * @param e
@@ -160,8 +160,8 @@ public class SampleEditorSintetico extends SampleEditor {
     }
 
     /************************************************************************
-     * @throws ValoreException 
-     * @throws SistemaException 
+     * @throws ValoreException
+     * @throws SistemaException
      * @see it.aspix.archiver.editor.SampleEditor#setPlot(it.aspix.sbd.obj.Sample)
      ***********************************************************************/
     @Override
@@ -175,7 +175,7 @@ public class SampleEditorSintetico extends SampleEditor {
         DirectoryInfo di = new DirectoryInfo();
         Cell cella = new Cell();
         Place pla = new Place();
-        
+
         plot.setCommunity(comunita.getText());
         di.setContainerName(progetto.getText());
         di.setContainerSeqNo(progrProgetto.getText());
@@ -184,7 +184,7 @@ public class SampleEditorSintetico extends SampleEditor {
         di.setSubContainerSeqNo(progrSottoprogetto.getText());
         di.setSubContainerExternalId(idSottoprogetto.getText());
         plot.setDirectoryInfo(di);
-        plot.setSurveyer(rilevatore.getText());  
+        plot.setSurveyer(rilevatore.getText());
         pla.setName(localita.getText());
         pla.setTown(comune.getText());
         pla.setRegion(regione.getText());
@@ -196,13 +196,13 @@ public class SampleEditorSintetico extends SampleEditor {
         plot.setCell(cella);
         return plot;
     }
-    
+
     @Override
     public String getLevelsSchema() {
         // questa classe non visualizza i livelli
         return null;
     }
-    
+
     /************************************************************************
      * La finestra che permette di inserire i dati sulle specie presenti nel
      * rilievo da cercare
@@ -210,17 +210,17 @@ public class SampleEditorSintetico extends SampleEditor {
     private class VincoliSpeciePresenti extends JDialog{
 
         private static final long serialVersionUID = 1L;
-        
+
         private static final String QUALSIASI_LIVELLO = "qualsiasi";
-        
+
         BorderLayout lPannelloPrincipale = new BorderLayout();
         JPanel pannelloPrincipale = new JPanel(lPannelloPrincipale);
-        
+
         GridBagLayout lPannelloPulsanti = new GridBagLayout();
         JPanel pannelloPulsanti = new JPanel(lPannelloPulsanti);
         JButton pulisci = new JButton();
         JButton ok = new JButton();
-        
+
         BorderLayout lPannelloScala = new BorderLayout();
         JPanel pannelloScala = new JPanel(lPannelloScala);
         JLabel eScalaAbbondanza         = new JLabel();
@@ -229,8 +229,8 @@ public class SampleEditorSintetico extends SampleEditor {
 
         GridLayout lPannelloNomi = new GridLayout(0,1);
         JPanel pannelloNomi = new JPanel(lPannelloNomi);
-        
-        Border[] bordo                  = new Border[4];    
+
+        Border[] bordo                  = new Border[4];
         GridBagLayout[] layoutGruppo    = new GridBagLayout[4];
         JPanel[]        pannelloGruppo  = new JPanel[4];
         JLabel          eNome[][]       = new JLabel[4][3];
@@ -239,15 +239,14 @@ public class SampleEditorSintetico extends SampleEditor {
         JComboBox       strato[][]      = new JComboBox[4][3];
         JLabel          ePresenza[][]   = new JLabel[4][3];
         JTextField      presenza[][]    = new JTextField[4][3];
-        
+
         public VincoliSpeciePresenti(){
-            System.out.println( modelloScalaAbbondanza.getSize() );
             eScalaAbbondanza.setText("Scala abbondanza:");
             scalaAbbondanzaVincoli.setSelectedIndex(1);
-            
+
             int i,j;
             for(i=0;i<4;i++){
-                bordo[i] = BorderFactory.createCompoundBorder( 
+                bordo[i] = BorderFactory.createCompoundBorder(
                     BorderFactory.createEmptyBorder(20,0,0,0),
                     BorderFactory.createCompoundBorder(
                             BorderFactory.createTitledBorder(BorderFactory.createLineBorder(CostantiGUI.coloreBordi),(i>0?"e anche ":"")+"una specie tra le seguenti"),
@@ -264,7 +263,7 @@ public class SampleEditorSintetico extends SampleEditor {
                     strato[i][j]=new JComboBox();
                     strato[i][j].setModel(new DefaultComboBoxModel(new String[]{QUALSIASI_LIVELLO,"1","2","3","4","5","6","7","8"}));
                     ePresenza[i][j]=new JLabel("pres. min:");
-                    presenza[i][j]=new JTextField();                
+                    presenza[i][j]=new JTextField();
                 }
             }
             // ---------- le stringhe ---------
@@ -272,15 +271,15 @@ public class SampleEditorSintetico extends SampleEditor {
             pulisci.setText("pulisci tutto");
             this.setTitle("Specie che caratterizzano il rilievo");
             // ---------- inserimento nei pannelli ----------
-            
+
             this.getContentPane().add(pannelloPrincipale);
             pannelloPrincipale.add(pannelloScala,BorderLayout.NORTH);
             pannelloPrincipale.add(pannelloNomi,BorderLayout.CENTER);
             pannelloPrincipale.add(pannelloPulsanti,BorderLayout.SOUTH);
-                                        
+
             pannelloScala.add(eScalaAbbondanza, BorderLayout.WEST);
             pannelloScala.add(scalaAbbondanzaVincoli, BorderLayout.CENTER);
-            
+
             for(i=0;i<4;i++){
                 for(j=0;j<3;j++){
                     pannelloGruppo[i].add(eNome[i][j],    new GridBagConstraints(0+j*4, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,    CostantiGUI.insetsEtichetta,        0, 0));
@@ -291,31 +290,31 @@ public class SampleEditorSintetico extends SampleEditor {
                     pannelloGruppo[i].add(presenza[i][j], new GridBagConstraints(3+j*4, 1, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,    CostantiGUI.insetsDatoTesto,      0, 0));
                 }
                 pannelloNomi.add(pannelloGruppo[i]);
-            }       
+            }
             pannelloPulsanti.add(pulisci,new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE,     CostantiGUI.insetsAzione, 0, 0));
             pannelloPulsanti.add(ok,     new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE,     CostantiGUI.insetsAzione, 100, 0));
-            
+
             ok.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent e) { ok_actionPerformed(); }
             });
             pulisci.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent e) { pulisci_actionPerformed(); }
             });
-            
+
             pannelloPrincipale.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
             // ---------- impostazioni ----------
             this.setModal(true);
             this.pack();
             UtilitaGui.centraDialogoAlloSchermo(this, UtilitaGui.CENTRO);
         }
-            
+
         /************************************************************************
          * premuto il tasto OK
          ***********************************************************************/
         protected void ok_actionPerformed() {
             this.setVisible(false);
         }
-        
+
         /************************************************************************
          * rimozione di tutti i dati presenti
          ***********************************************************************/
@@ -327,14 +326,14 @@ public class SampleEditorSintetico extends SampleEditor {
                     presenza[riga][colonna].setText("");
                 }
         }
-        
+
         /************************************************************************
          * @return la scala di abbondanza selezionata
          ***********************************************************************/
         public String getScalaAbbondanza(){
             return modelloScalaAbbondanza.getSelectedEnum();
         }
-        
+
         /************************************************************************
          * I nomi degli strati sono fatti convenzionalmente così:
          * sMN.L dove:
@@ -355,7 +354,7 @@ public class SampleEditorSintetico extends SampleEditor {
             int contatoreStrati;    // viene incrementato durante l'inserimento
             SurveyedSpecie  ss;     // specie rilevata
             String buffer;
-            
+
             for(i=0;i<4;i++){
                 for(j=0;j<3;j++){
                     if(nome[i][j].getSpecieRef().getName()!=null && nome[i][j].getSpecieRef().getName().length()>0)
@@ -386,10 +385,10 @@ public class SampleEditorSintetico extends SampleEditor {
                         level[contatoreStrati].addSurveyedSpecie(ss);
                         Stato.debugLog.fine(level[contatoreStrati].toXMLString(false));
                         contatoreStrati++;
-                    }   
+                    }
                 }
             Stato.debugLog.fine("Condizioni inserite:"+contatoreStrati);
-            return level;   
+            return level;
         }
     }// FINE inner-class VincoliSpeciePresenti
 
@@ -397,10 +396,10 @@ public class SampleEditorSintetico extends SampleEditor {
     public String toString() {
         return "rilievi";
     }
-    
+
     /** @see it.aspix.archiver.archiver.TopLevelEditor **/
 	public String getSuggerimenti() {
 		return null;
 	}
-    
+
 }

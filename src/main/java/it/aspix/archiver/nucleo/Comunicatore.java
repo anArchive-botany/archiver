@@ -597,7 +597,7 @@ public class Comunicatore {
             String url = Proprieta.recupera("connessione.URL")
                     + "/ws/" + pathServizio + (idOggetto != null ? "/" + idOggetto : "")
                     + (parametri != null ? "?" + parametri : "")
-                    + (simulazione ? (parametri != null ? "&" : "") + "simulation=true" : "");
+                    + (simulazione ? (parametri != null ? "&" : "?") + "simulation=true" : "");
             String credentials = new String(Base64.getEncoder()
                     .encode((Proprieta.recupera("connessione.nome") + ":" + Proprieta.recupera("connessione.password"))
                             .getBytes()));

@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.componenti;
 
@@ -54,11 +54,11 @@ import javax.swing.JScrollPane;
 
 /****************************************************************************
  * Un oggetto in grado di gestire un elenco di link
- * 
+ *
  * @author Edoardo Panfili, studio Aspix
  ***************************************************************************/
 public class LinkArrayManager extends JPanel{
-    
+
     private static final long serialVersionUID = 1L;
     DefaultListModel contenutoLista;
     ListaConProprietario contenitoreLinks = new ListaConProprietario();
@@ -67,13 +67,13 @@ public class LinkArrayManager extends JPanel{
     JButton aggiungiBlob = new JButton(Icone.AddBlob);
     JButton incollaLink = new JButton(Icone.LinkTo);
     DirectoryInfo datiProprietario;
-    
+
     public LinkArrayManager(){
         JScrollPane scroll = new JScrollPane();
         JPanel pannelloPulsanti = new JPanel(new GridLayout(0,1));
-        
+
         incollaLink.setName("directoryInfo.pasteLink");
-        
+
         contenutoLista = new DefaultListModel();
         contenitoreLinks.setModel(contenutoLista);
         this.setLayout(new BorderLayout());
@@ -83,13 +83,13 @@ public class LinkArrayManager extends JPanel{
         pannelloPulsanti.add(rimuovi);
         pannelloPulsanti.add(aggiungiBlob);
         pannelloPulsanti.add(incollaLink);
-        
+
         scroll.getViewport().add(contenitoreLinks);
         contenitoreLinks.setCellRenderer(new RenderLink());
         this.setMinimumSize(new Dimension(250,5));
         this.setPreferredSize(new Dimension(250,5));
         pannelloPulsanti.setOpaque(false);
-        
+
         aggiungiGenerico.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 azione_aggiungiGenerico();
@@ -119,7 +119,7 @@ public class LinkArrayManager extends JPanel{
             }
         });
     }
-    
+
     /************************************************************************
      * Imposta un proprietario, nel caso questo sia utilizzabile questo
      * componente recupererà i link esistenti e permetterà di inserire nuovi link.
@@ -153,7 +153,7 @@ public class LinkArrayManager extends JPanel{
         Class antenato = UtilitaGui.getContenitoreTra(this,possibili);
         aggiungiBlob.setVisible(antenato!=BlobEditor.class);
     }
-    
+
     /************************************************************************
      * Invia il link al server
      ***********************************************************************/
@@ -168,7 +168,7 @@ public class LinkArrayManager extends JPanel{
             addLink(l);
         }
     }
-    
+
     /************************************************************************
      * Rimuove il link dal server
      ***********************************************************************/
@@ -185,10 +185,10 @@ public class LinkArrayManager extends JPanel{
             Dispatcher.consegna(this, e);
         }
     }
-    
+
     /************************************************************************
-     * Gestisce l'immissione di un oggetto binario, e successivamente 
-     * inserisce il link 
+     * Gestisce l'immissione di un oggetto binario, e successivamente
+     * inserisce il link
      ***********************************************************************/
     void azione_aggiungiBlob(){
         DirectoryInfo i = Dispatcher.insert(CostruttoreOggetti.createBlob(null));
@@ -202,7 +202,7 @@ public class LinkArrayManager extends JPanel{
             Dispatcher.consegna(this, CostruttoreOggetti.createMessage("Non è stato possibile inserire l'oggetto binario", "it", MessageType.ERROR));
         }
     }
-    
+
     /************************************************************************
      * Incolla un link
      ***********************************************************************/
@@ -217,7 +217,7 @@ public class LinkArrayManager extends JPanel{
     		Dispatcher.consegna(this, CostruttoreOggetti.createMessage("Prima di cincollare devi \"copiare\" un link.", "it", MessageType.WARNING));
     	}
     }
-    
+
     /************************************************************************
      * Invia al server un link inserendo prima i dati del proprietario di
      * questo pannello nella parte from
@@ -240,21 +240,20 @@ public class LinkArrayManager extends JPanel{
 	        }
         }
     }
-    
+
     /************************************************************************
-     * Chiede la visualizzazione dell'oggetto su cui è 
+     * Chiede la visualizzazione dell'oggetto su cui è
      * stato fatto il doppio click
      * @param e
      ***********************************************************************/
     void azione_doppioClick(MouseEvent e){
         Link l = (Link) contenitoreLinks.getSelectedValue();
-        System.out.println("link: "+l);
         if(l.getUrl()!=null && l.getUrl().length()>0){
             // è un link: uso DestokAPI per aprire la pagina web
         	DesktopApiWrapper.openLink(this, l.getUrl());
         }else{
             // cerco l'altro capo del link, si fa affidamento che uno dei due capi
-            // sia il proprietario di questa lista 
+            // sia il proprietario di questa lista
             DirectoryInfo target = new DirectoryInfo();
             if(l.getFromName().equals(datiProprietario.getContainerName()) && l.getFromSeqNo().equals(datiProprietario.getContainerSeqNo())){
                 target.setContainerName(l.getToName());
@@ -291,7 +290,7 @@ public class LinkArrayManager extends JPanel{
                     // publication
                     throw new ValoreException("Non posso visualizzare "+contenuto);
                 }
-                
+
                 Dispatcher.consegna(this, daVisualizzare, null);
             } catch (Exception e1) {
                 Dispatcher.consegna(this, e1);

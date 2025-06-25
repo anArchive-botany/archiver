@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.componenti.insiemi;
 
@@ -25,28 +25,26 @@ import java.util.HashMap;
  ***************************************************************************/
 public class SurveyedSpecieSet{
 
-	private static final long serialVersionUID = 1L;
-	
 	private HashMap<String,SurveyedSpecie> insieme;
-	
+
 	/************************************************************************
 	 * Costruisce un nuovo insieme vuoto
 	 ***********************************************************************/
 	public SurveyedSpecieSet(){
 		insieme = new HashMap<String,SurveyedSpecie>();
 	}
-	
+
 	/************************************************************************
 	 * Costruisce un insieme con gli stessi elementi di orig
 	 * @param orig insieme da cui prendere gli elementi
 	 ***********************************************************************/
 	public SurveyedSpecieSet(SurveyedSpecieSet orig){
-		insieme = new HashMap<String,SurveyedSpecie>(); 
+		insieme = new HashMap<String,SurveyedSpecie>();
 		for( SurveyedSpecie ss : orig.insieme.values()){
 			add(ss);
 		}
 	}
-	
+
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		for( SurveyedSpecie ss : insieme.values()){
@@ -55,7 +53,7 @@ public class SurveyedSpecieSet{
 		}
 		return sb.toString();
 	}
-	
+
 	private String chiave(SurveyedSpecie ss){
 		return ss.getSpecieRefName()+ss.getSpecieRefAliasOf()+ss.getDetermination();
 	}
@@ -69,7 +67,7 @@ public class SurveyedSpecieSet{
 			insieme.put(chiave, ss);
 		}
 	}
-	
+
 	/************************************************************************
 	 * @param sss l'insieme di specie da aggiungere all'insieme
 	 ***********************************************************************/
@@ -78,7 +76,7 @@ public class SurveyedSpecieSet{
 			add(ss);
 		}
 	}
-	
+
 	/************************************************************************
 	 * @param ss l'elemento da rimuovere da questo insieme
 	 ***********************************************************************/
@@ -86,7 +84,7 @@ public class SurveyedSpecieSet{
 		String chiave = chiave(ss);
 		insieme.remove(chiave);
 	}
-	
+
 	/************************************************************************
 	 * @return l'eleneco degli elementi di questo insieme
 	 ***********************************************************************/
@@ -98,14 +96,14 @@ public class SurveyedSpecieSet{
 		}
 		return risultato;
 	}
-	
+
 	/************************************************************************
 	 * @return il numero di elementi di questo insieme
 	 ***********************************************************************/
 	public int size(){
 		return insieme.size();
 	}
-	
+
 	/************************************************************************
 	 * @param s la specie da controllare
 	 * @return true se la specie è presente
@@ -128,7 +126,7 @@ public class SurveyedSpecieSet{
 		}
 		return true;
 	}
-	
+
 	/************************************************************************
 	 * @param altro insieme da utilizzare nel test
 	 * @return true se questo insieme contiene l'altro
@@ -142,5 +140,5 @@ public class SurveyedSpecieSet{
 		}
 		return sottrazione;
 	}
-	
+
 }

@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.componenti;
 
@@ -27,11 +27,10 @@ public class CoppiaCSTesto implements CoppiaED{
     private String descrizione;
 
     public CoppiaCSTesto(ValoreEnumeratoDescritto v){
-    	System.out.println("CREO "+v.enumerato+"  "+v.descrizione);
         this.esterno = v.enumerato;
         this.descrizione = v.descrizione;
     }
-    
+
     public CoppiaCSTesto(String enumerato, String descrizione){
         this.esterno = enumerato;
         this.descrizione = descrizione;
@@ -41,7 +40,6 @@ public class CoppiaCSTesto implements CoppiaED{
      * la rappresentazione di default è quella del client
      **************************************************************************/
     public String toString(){
-    	System.out.println("******"+descrizione);
         return descrizione;
     }
 

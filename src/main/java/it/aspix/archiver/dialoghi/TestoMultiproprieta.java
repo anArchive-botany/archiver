@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.dialoghi;
 
@@ -38,21 +38,14 @@ import it.aspix.archiver.componenti.CoppiaCSTesto;
  * Le singole proprietà devono essere precedute da un prefisso.
  * I prefissi devono avere un pattern comune.
  * Attualmente questo componente è specializzato per la sintassonomia.
- * 
+ *
  * @author Edoardo Panfili, studio Aspix
  ***************************************************************************/
 public class TestoMultiproprieta extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 
-	public static void main(String g[]) throws Exception{
-		TestoMultiproprieta cm = new TestoMultiproprieta();
-		cm.setText("AS: associazione AL:alleanza SO:subordine lungo e In parti XO:loer");
-		cm.setVisible(true);
-		System.out.println(cm.getText());
-	}
-	
-	// XXX: questo potrebbe essere passato come parametro ma siccome finora 
+	// XXX: questo potrebbe essere passato come parametro ma siccome finora
 	// CampoMultiproprieta viene usato in un solo contesto lo lascio qui
 	// XXX: ATTENZIONE: questa lista è duplicata in it.aspix.argentaroggia.web.vegetazione.TabellaDescrizioniRilieviTesto
 	// sarebbe il caso di razionalizzare la cosa o di gestire proprio separamente le parti della classificazione
@@ -70,13 +63,13 @@ public class TestoMultiproprieta extends JDialog{
 			  new CoppiaCSTesto("SC:", "subclasse"),
 			new CoppiaCSTesto("SS:", "superclasse")
 	};
-	
+
 	// tutte le stringhe che seguono il pattern sotto devono essere un prefisso
 	private Pattern patternPrefisso = Pattern.compile("([A-Z][A-Z]?[A-Z]?:)");
-	
+
 	JLabel nome[];
 	JTextField valore[];
-	
+
 	public TestoMultiproprieta(){
 		JPanel principale = new JPanel(new BorderLayout());
 		JPanel dati = new JPanel(new GridBagLayout());
@@ -84,7 +77,7 @@ public class TestoMultiproprieta extends JDialog{
 		JButton ok = new JButton("ok");
 		nome = new JLabel[prefissi.length];
 		valore = new JTextField[prefissi.length];
-		
+
 		for(int i=0 ; i<prefissi.length ; i++){
 			nome[i] = new JLabel(prefissi[i].getDescrizione());
 			valore[i] = new JTextField();
@@ -115,7 +108,7 @@ public class TestoMultiproprieta extends JDialog{
 		int arrivo;
 		String parte;
 		int posizionePrefisso;
-		
+
 		// controllo la presenza di prefissi errati
 		while(m.find()){
 			prefisso = m.group(1);
@@ -132,7 +125,7 @@ public class TestoMultiproprieta extends JDialog{
 				throw new Exception("Prefisso \""+prefisso+"\" non gestibile");
 			}
 		}
-		
+
 		// trovo la posizione di tutti i prefissi,
 		// l'ultimo è fittizio ed è la fine della stringa
 		int posizione[] = new int[prefissi.length+1];
@@ -140,7 +133,7 @@ public class TestoMultiproprieta extends JDialog{
 		for(int i=0; i<prefissi.length; i++){
 			posizione[i] = testo.indexOf(prefissi[i].getEsterno());
 		}
-		
+
 		// imposto i contenuti delle singole caselle
 		for(int i=0; i<prefissi.length; i++){
 			if(posizione[i]!=-1){
@@ -156,7 +149,7 @@ public class TestoMultiproprieta extends JDialog{
 			}
 		}
 	}
-	
+
 	/************************************************************************
 	 * @return una stringa che rappresenta il contenuto di questo dialogo
 	 ***********************************************************************/

@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright 2011 studio Aspix 
+ * Copyright 2011 studio Aspix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  ***************************************************************************/
 package it.aspix.archiver.archiver;
 
@@ -43,13 +43,13 @@ public class Raccoglitore extends JPanel implements ChangeListener{
 
     private static final long serialVersionUID = 1L;
     private static final int OCCUPAZIONE_BORDI = 10;
-    
+
     private Linguette linguette = new Linguette();
     private JPanel pannelloContenuto = new JPanel(new BorderLayout()); // di volta in volta il PannelloDescrivibile visualizzato
     private ArrayList <PannelloDescrivibile> elementi;         // oggetti visualizzati
     private int selezionata = 0;                        // rispetto all'array elementi
     private boolean minimale = false;
-    
+
     public Raccoglitore(){
         elementi = new ArrayList<PannelloDescrivibile>();
         this.setLayout(new BorderLayout());
@@ -57,7 +57,7 @@ public class Raccoglitore extends JPanel implements ChangeListener{
         this.add(pannelloContenuto, BorderLayout.CENTER);
         pannelloContenuto.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, CostantiGUI.coloreBordi));
     }
-    
+
     /************************************************************************
      * @param pd da aggiungere a quelli visualizzati
      ***********************************************************************/
@@ -68,38 +68,36 @@ public class Raccoglitore extends JPanel implements ChangeListener{
         linguette.aggiornaLinguette();
         this.updateUI();
     }
-    
+
     /************************************************************************
      * La barra che rappresenta le linguette
      ***********************************************************************/
     public class Linguette extends JComponent {
-        
+
         private static final long serialVersionUID = 1L;
         protected static final int ALTEZZA  = 25;
-        
+
         public Linguette(){
             this.addMouseListener(new MouseListener() {
                 public void mouseReleased(MouseEvent e) {}
                 public void mousePressed(MouseEvent e) {
-                    // System.out.println("pressed "+e.getPoint());
                     checkMouse(e.getPoint());
                 }
                 public void mouseExited(MouseEvent e) {}
                 public void mouseEntered(MouseEvent e) {}
                 public void mouseClicked(MouseEvent e) {
-                    // System.out.println("click! "+e.getPoint());
                     checkMouse(e.getPoint());
                 }
             });
         }
-        
+
         private int partenza[] = new int[100]; // sovrabbondante ma per evitare di creare in continuazione array
 
         @Override
         public Dimension getMaximumSize(){
             return new Dimension(3000,ALTEZZA);
         }
-        
+
         @Override
         public Dimension getMinimumSize(){
             return new Dimension(100,ALTEZZA);
@@ -109,23 +107,21 @@ public class Raccoglitore extends JPanel implements ChangeListener{
         public Dimension getPreferredSize(){
             return new Dimension(100,ALTEZZA);
         }
-        
+
         @Override
         public void update(Graphics g) {
-            // System.out.println("update!");
             super.update(g);
         }
-        
+
         private static final int SPAZIO_PRIMA = 10;
         private static final int SPAZIO_DOPO = 20;
         @Override
         public void paint(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
-            // System.out.println("paint! "+g2d.getClipBounds());
             int larghezza;
             Path2D.Double path;
-            
-            
+
+
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             partenza[0]=0;
             for(int indiceNome=0 ; indiceNome<elementi.size() ; indiceNome++){
@@ -153,30 +149,28 @@ public class Raccoglitore extends JPanel implements ChangeListener{
             }
             g2d.drawLine(0, ALTEZZA-1, partenza[selezionata], ALTEZZA-1);
             g2d.drawLine(partenza[selezionata+1], ALTEZZA-1, 3000, ALTEZZA-1);
-            
+
             super.paint(g);
         }
-        
+
         public void checkMouse(Point p){
             for(int indiceNome=0 ; indiceNome<elementi.size() ; indiceNome++){
                 if(partenza[indiceNome]<p.x && p.x<partenza[indiceNome+1]){
-                    // System.out.println("  click su linguetta "+indiceNome);
                     selezionata = indiceNome;
                     aggiornaLinguette();
                 }
             }
         }
-        
+
         public void aggiornaLinguette(){
             pannelloContenuto.removeAll();
             pannelloContenuto.add(elementi.get(selezionata));
             Raccoglitore.this.updateUI();
             this.repaint();
         }
-        
+
         private Color whiter(Color c){
             Color risposta = new Color((c.getRed()+510)/3, (c.getGreen()+510)/3, (c.getBlue()+510)/3 );
-            // System.out.println(c+"  "+risposta);
             return risposta;
         }
 
@@ -200,7 +194,7 @@ public class Raccoglitore extends JPanel implements ChangeListener{
         this.selezionata = selezionata;
         linguette.aggiornaLinguette();
     }
-    
+
     /************************************************************************
      * @return truse se preferredSize è uguale a minimumSize
      ***********************************************************************/
@@ -218,7 +212,7 @@ public class Raccoglitore extends JPanel implements ChangeListener{
 	public Dimension getPreferredSize(){
         Dimension risposta;
         Dimension t;
-        
+
         if(minimale){
         	risposta = getMinimumSize();
         }else{
@@ -237,11 +231,11 @@ public class Raccoglitore extends JPanel implements ChangeListener{
         }
         return risposta;
     }
-    
+
     public Dimension getMinimumSize(){
         Dimension risposta = new Dimension(0,0);
         Dimension t;
-        
+
         for( PannelloDescrivibile pd: elementi){
             t = pd.getMinimumSize();
             if(t.height>risposta.height){
@@ -256,5 +250,5 @@ public class Raccoglitore extends JPanel implements ChangeListener{
         return risposta;
     }
 
-    
+
 }
