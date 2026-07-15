@@ -11,7 +11,7 @@ CARTELLA_JARS=target/lib
 # dove mettere il file compilato
 DESTINAZIONE=target
 # versione (recuperata dal file pom)
-VERSIONE=$(grep -m 1 version pom.xml | sed 's/[^0-9\\.]//g')
+VERSIONE=$(grep -m 1 "<version>" pom.xml | sed 's/[^0-9\\.]//g')
 # nome del jar principale (contiene anche il numero di versione)
 JAR_PRINCIPALE="archiver-$VERSIONE.jar"
 
