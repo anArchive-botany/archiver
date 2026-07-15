@@ -57,8 +57,9 @@ public class Archiver {
 	        InputStream is = Archiver.class.getResourceAsStream("/it/aspix/archiver/icone/anArchive_doc.png");
 	        Image i = ImageIO.read( is );
 	        tb.setIconImage(i);
-        }catch(IOException | IllegalArgumentException e) {
+        }catch(IOException | IllegalArgumentException | UnsupportedOperationException e) {
         	// do nothing
+            System.out.println("Non c'è il supporto per TaskBar, pazienza");
         	e.printStackTrace();
         }
 
