@@ -27,7 +27,7 @@ echo "DESTINAZIONE  : $DESTINAZIONE"
 mvn -q clean
 mvn -q package -DskipTests
 
-MODULI=java.desktop,java.logging
+MODULI=java.desktop,java.logging,java.net.http
 MAINCLASS=it.aspix.archiver.archiver.Archiver
 
 if [[ "$OSTYPE" == "darwin"*  ]]; then
