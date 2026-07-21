@@ -9,6 +9,13 @@ mvn clean
 mvn package
 ```
 
+su alcune combinazioni monitor/linux l'interfaccia viene piccolissima, in caso può essere
+utile lanciare java con il parametro "-Dsun.java2d.uiScale=2.0",
+per aggiugerlo nella creazione del pacchetto serve aggiungere un parametro a jpackage
+```shell
+    --java-options "-Dsun.java2d.uiScale=2.0" \
+```
+
 
 # aggiungere questa applicazione come artefatto al repository locale di Maven
 
@@ -26,3 +33,5 @@ Serve bash, scritto usando git bash
 ```bash
 creazionePacchetto.sh
 ```
+
+

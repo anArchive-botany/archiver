@@ -8,3 +8,9 @@
 
 #Roba di intellij
 .idea
+
+#Roba di VSCode
+.vscode
+
+#Roba di Eclipse
+.project

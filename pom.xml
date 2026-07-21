@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project root="true" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   
-  <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.1.0</modelVersion>
   <groupId>it.aspix</groupId>
   <artifactId>archiver</artifactId>
   <packaging>jar</packaging>
-  <version>6.0</version>
+  <version>6.0.0</version>
   <name>archiver</name>
   <url>http://www.anarchive.it</url>
 
@@ -22,6 +22,10 @@
       <version>[6.1,)</version>
       <scope>compile</scope>
     </dependency>
+    <!--
+    Le dipendenze qui sotto credo siano un residuo ancestrale di quando in questo
+    pacchetto c'era anche tab-parser
+    sono saltati fuori grazie a "mvn dependency:analyze"
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-jexl</artifactId>
@@ -41,14 +45,15 @@
       <scope>compile</scope>
       <exclusions>
         <exclusion>
-          <!-- serve per evitare che "import javax.xml.parsers.SAXParser" provochi l'errore: -->
-          <!-- The package javax.xml.parsers is accessible from more than one module: <unnamed>, java.xml -->
-          <!-- sebbene funzioni il comando  mvn dependency:tree continua a mostrare la dipendenza -->
+          <!- - serve per evitare che "import javax.xml.parsers.SAXParser" provochi l'errore: - ->
+          <!- - The package javax.xml.parsers is accessible from more than one module: <unnamed>, java.xml - ->
+          <!- - sebbene funzioni il comando  mvn dependency:tree continua a mostrare la dipendenza - ->
           <groupId>xml-apis</groupId>
           <artifactId>xml-apis</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
+    </dependency> -->
+    
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -62,7 +67,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.11.0</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -75,7 +80,8 @@
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
               <overWriteIfNewer>true</overWriteIfNewer>
-            </configuration>
+              <includeScope>runtime</includeScope><!-- non prendere i jar per il test come junit-->
+            </configuration>  
           </execution>
         </executions>
       </plugin>
@@ -86,6 +92,54 @@
         <configuration>
           <outputDirectory>${progetto.jars}</outputDirectory>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.7.1</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <appendAssemblyId>true</appendAssemblyId>
+          <archive>
+            <manifest>
+              <mainClass>it.aspix.archiver.archiver.Archiver</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>fat-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- i plugin sotto sono di default ma se non si fissa la versione si hanno warning del tipo
+      "Version not locked for default bindings plugins [maven-NOME-plugin], 
+      you should define versions in pluginManagement section of your pom.xml or parent" -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.4.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
       </plugin>
     </plugins>
   </build>

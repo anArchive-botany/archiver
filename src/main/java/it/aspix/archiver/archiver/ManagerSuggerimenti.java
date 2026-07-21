@@ -39,6 +39,7 @@ import javax.swing.JTextField;
 import javax.swing.JWindow;
 import javax.swing.ToolTipManager;
 
+import it.aspix.archiver.Utilita;
 import it.aspix.archiver.nucleo.Proprieta;
 
 /****************************************************************************
@@ -52,7 +53,10 @@ public class ManagerSuggerimenti {
 	private static JWindow finestra = new JWindow();	// senza decorazioni che andrà a contenre le indicazioni
 	private static JEditorPane te = new JEditorPane();	// unico elemento di finestra
 	static {
-		InputStream is = ManagerSuggerimenti.class.getResourceAsStream("../descrizioneCampi.txt");
+		// attenzione: per via del meccanismo di risoluzione dei path
+		// nei file jar è bene che a prendere la risorsa sia una classe
+		// che sta nello stesso pacchetto (insomma: evita robe tipo "../")
+		InputStream is = Utilita.class.getResourceAsStream("descrizioneCampi.txt");
 		descrizioni = new Properties();
 		try {
 			loadProperties(descrizioni, is);
