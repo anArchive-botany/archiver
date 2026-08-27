@@ -155,7 +155,7 @@ connessione.password@NASCONDI=true
 
 connessione.URL@DESCRIZIONE=Indirizzo di connessione con il server
 connessione.URL@TIPO=stringa
-connessione.URL@DEFAULT=http://www.anarchive.info/anArchive
+connessione.URL@DEFAULT=http://www.anarchive.it/anArchive
 
 connessione.lingua@DESCRIZIONE=La lingua da dichiarare al server
 connessione.lingua@TIPO=stringa
